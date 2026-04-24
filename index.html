@@ -314,7 +314,25 @@
     }
     .nav-dot:hover .tooltip { opacity: 1; }
 
-    .vega-embed { margin: 0 auto !important; display: flex; justify-content: center; }
+    /* Force all Vega-Lite charts to fit within their containers without overflow */
+    .vega-embed {
+      margin: 0 auto !important;
+      display: flex;
+      justify-content: center;
+      width: 100% !important;
+      max-width: 100% !important;
+      overflow-x: auto;
+    }
+    .vega-embed details, 
+    .vega-embed summary,
+    .vega-embed .vega-actions {
+      display: none; /* Cleaner look, optional */
+    }
+    canvas, svg {
+      max-width: 100%;
+      height: auto;
+    }
+    /* Ensure all chart containers respect width */
     #observablehq-local_races_per_year-582,
     #observablehq-local_top_jockeys-582,
     #observablehq-local_avg_weight-582,
@@ -345,10 +363,13 @@
     #observablehq-grandsires_wins-582,
     #observablehq-gb_top_courses_prize-9c0da185,
     #observablehq-nongb_top_courses_prize-9c0da185,
-    #observablehq-nongb_fastest_time-9c0da185 {
+    #observablehq-nongb_fastest_time-9c0da185,
+    #observablehq-e13c521e {
       display: flex;
       justify-content: center;
       width: 100%;
+      max-width: 100%;
+      overflow-x: auto;
     }
 
     @media (max-width: 700px) {
@@ -489,16 +510,10 @@
     document.getElementById('section-welcome').scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 
-  // ---------- LEAFLET MAP (clean, original version, no duplicates) ----------
-  // Simple map initialization without any extra DOM manipulation
-  const map = L.map('map', {
-    worldCopyJump: false,
-    maxBounds: [[-85, -180], [85, 180]],
-    maxBoundsViscosity: 1.0
-  }).setView([52.5, -1.5], 6);
+  // LEAFLET MAP (clean, original)
+  const map = L.map('map').setView([52.5, -1.5], 6);
   L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
     attribution: 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012',
-    noWrap: true
   }).addTo(map);
 
   let allCourses = [];
@@ -526,7 +541,6 @@
     sorted.forEach(c => { const opt = document.createElement('option'); opt.value = c.name; opt.textContent = c.name; dropdown.appendChild(opt); });
   }
 
-  // Load courses and add markers (only once)
   fetch('data/racecourses.json')
     .then(response => response.json())
     .then(raceCourses => {
@@ -584,7 +598,7 @@
   document.addEventListener('mouseup', () => { drag=false; horse.style.cursor='grab'; });
   updateHorse();
 
-  // Dot navigation (tooltips updated)
+  // Dot navigation
   const dots = document.querySelectorAll('.nav-dot');
   const sections = Array.from(dots).map(d => document.getElementById(d.dataset.section));
   function updateActiveDot() { let idx = 0; const scrollPos = window.scrollY+140; sections.forEach((s,i) => { if(s && s.offsetTop <= scrollPos) idx=i; }); dots.forEach((d,i) => i===idx ? d.classList.add('active') : d.classList.remove('active')); }
@@ -593,13 +607,21 @@
   dots.forEach((dot,idx) => dot.addEventListener('click', () => sections[idx]?.scrollIntoView({behavior:'smooth'})));
 </script>
 
-<!-- Observable Runtime (unchanged) -->
+<!-- Observable Runtime: version 597, 583, 582, and new 631 for the combined chart -->
 <script type="module">
 import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@5/dist/runtime.js";
 import define597 from "https://api.observablehq.com/d/b4374c2e7ce71428@597.js?v=4";
 import define583 from "https://api.observablehq.com/d/b4374c2e7ce71428@583.js?v=4";
 import define582 from "https://api.observablehq.com/d/b4374c2e7ce71428@582.js?v=4";
+import define631 from "https://api.observablehq.com/d/b4374c2e7ce71428@631.js?v=4";
 
+// New combined chart from version 631
+new Runtime().module(define631, name => {
+  if (name === "e13c521e") return new Inspector(document.querySelector("#observablehq-e13c521e"));
+  return { fulfilled() {}, rejected() {} };
+});
+
+// 597: gb_top_courses_prize, nongb_top_courses_prize, nongb_fastest_time
 new Runtime().module(define597, name => {
   if (name === "gb_top_courses_prize") return new Inspector(document.querySelector("#observablehq-gb_top_courses_prize-9c0da185"));
   if (name === "nongb_top_courses_prize") return new Inspector(document.querySelector("#observablehq-nongb_top_courses_prize-9c0da185"));
@@ -607,10 +629,12 @@ new Runtime().module(define597, name => {
   return { fulfilled() {}, rejected() {} };
 });
 
+// 583: avgprizetracks
 new Runtime().module(define583, name => {
   if (name === "avgprizetracks") return new Inspector(document.querySelector("#observablehq-avgprizetracks-0d4d4b75"));
 });
 
+// 582: everything else
 new Runtime().module(define582, name => {
   if (name === "coursesList") return;
   if (name === "viewof selectedCourse") {
