@@ -1,0 +1,80 @@
+body {
+  font-family: "Segoe UI", sans-serif;
+  background: #F5E6D3; /* beige/tan */
+  margin: 0;
+  color: #2F2F2F;
+}
+
+.hero {
+  background: #6DBE8A; /* solid green */
+  color: #FF8FB1; /* pink accent */
+  text-align: center;
+  padding: 40px;
+  border-radius: 0 0 20px 20px;
+}
+
+.card {
+  background: white;
+  margin: 20px;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  border: 2px solid #6DBE8A; /* green border */
+}
+
+h2 {
+  color: #FF8FB1; /* pink */
+}
+
+#map {
+  height: 400px;
+  border-radius: 15px;
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+  color: #888;
+}
+
+/* layout */
+.container {
+  display: flex;
+}
+
+.content {
+  width: 95%;
+}
+
+.track {
+  width: 5%;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  background: #F5E6D3; /* beige */
+  overflow: hidden;
+  border-left: 1px solid #6DBE8A; /* thin green border */
+}
+
+/* track visuals */
+.track-img {
+  position: absolute;
+  height: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: auto;
+}
+
+#horse {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px; /* smaller horse */
+  transition: top 0.2s ease-out;
+}
+
+/* section spacing */
+.section {
+  margin-bottom: 80px;
+}

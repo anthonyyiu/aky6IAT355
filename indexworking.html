@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Horse Racing Insights</title>
+
+  <!-- Vega-Lite -->
+  <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+
+  <!-- Leaflet -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+  <!-- Observable Inspector -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@observablehq/inspector@5/dist/inspector.css">
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: "Segoe UI", system-ui, sans-serif;
+      background: #F5E6D3;
+      color: #2F2F2F;
+    }
+
+    /* layout */
+    .container {
+      display: flex;
+      position: relative;
+    }
+    .content {
+      width: 98%;
+      padding: 2rem 2rem 4rem 2rem;
+      background: #F5E6D3;
+    }
+    .track {
+      width: 2%;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      background: #F5E6D3;
+      overflow: hidden;
+      border-left: 1px solid #6DBE8A;
+    }
+    .track-img {
+      position: absolute;
+      height: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: auto;
+    }
+    #horse {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 40px;
+      transition: top 0.05s linear;
+      cursor: grab;
+      user-select: none;
+    }
+    #horse:active { cursor: grabbing; }
+
+    /* hero */
+    .hero {
+      background: #6DBE8A;
+      color: #FF8FB1;
+      text-align: center;
+      padding: 40px;
+      border-radius: 0 0 20px 20px;
+      margin-bottom: 30px;
+    }
+    .hero h1 { font-size: 2rem; color: white; }
+    .hero p { color: #F9F3EF; }
+
+    /* cards */
+    .card {
+      background: white;
+      margin: 20px auto;
+      padding: 16px 20px;
+      border-radius: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      border: 2px solid #6DBE8A;
+      max-width: 85%;
+      transition: transform 0.2s;
+    }
+    .card:hover { transform: translateY(-2px); }
+    .vis-card {
+      background: #fefefe;
+      margin: 1.2rem 0;
+      padding: 1.2rem 1.5rem;
+      border-radius: 16px;
+      border: 1px solid #e0d6cc;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+      transition: box-shadow 0.2s;
+    }
+    .vis-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
+    .vis-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #FF8FB1;
+      margin-bottom: 0.5rem;
+      border-left: 4px solid #6DBE8A;
+      padding-left: 12px;
+    }
+    .vis-description {
+      font-size: 0.85rem;
+      color: #5a5a5a;
+      margin-bottom: 1rem;
+      line-height: 1.4;
+    }
+    .vis-note {
+      font-size: 0.75rem;
+      color: #8b8b8b;
+      margin-top: 0.8rem;
+      font-style: italic;
+    }
+    h2, h3 { color: #FF8FB1; margin-bottom: 12px; }
+    h2 { font-size: 1.6rem; }
+    h3 { font-size: 1.2rem; margin-top: 20px; }
+
+    #map {
+      height: 500px;
+      border-radius: 15px;
+      margin-top: 15px;
+    }
+    footer {
+      text-align: center;
+      padding: 24px 16px;
+      color: white;
+      font-size: 0.9rem;
+      background: linear-gradient(135deg, #6DBE8A 0%, #4A9B74 100%);
+      border-top: 1px solid rgba(255,255,255,0.25);
+    }
+    .section { margin-bottom: 3rem; }
+    .course-selector {
+      background: #F5E6D3;
+      border: 2px solid #6DBE8A;
+      border-radius: 40px;
+      padding: 10px 18px;
+      font-size: 1rem;
+      font-weight: 500;
+      color: #2F2F2F;
+      cursor: pointer;
+      margin: 15px 0;
+      width: 100%;
+      max-width: 320px;
+    }
+    .flex-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+    /* tabs */
+    .tab-group {
+      display: flex;
+      gap: 0;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #6DBE8A;
+    }
+    .tab-btn {
+      background: white;
+      border: 2px solid #6DBE8A;
+      border-bottom: none;
+      padding: 8px 24px;
+      border-radius: 12px 12px 0 0;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: all 0.2s;
+      margin-right: 4px;
+      color: #2F2F2F;
+    }
+    .tab-btn.active {
+      background: #6DBE8A;
+      color: white;
+      border-bottom: 2px solid #6DBE8A;
+    }
+    .tab-btn:hover { background: #A8E6CF; }
+
+    /* dot navigation */
+    .dot-nav {
+      position: fixed;
+      left: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      z-index: 1000;
+      background: rgba(245, 230, 211, 0.8);
+      backdrop-filter: blur(4px);
+      padding: 12px 8px;
+      border-radius: 40px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .nav-dot {
+      width: 12px;
+      height: 12px;
+      background: #6DBE8A;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+    .nav-dot:hover { transform: scale(1.4); background: #FF8FB1; }
+    .nav-dot.active {
+      background: #FF8FB1;
+      box-shadow: 0 0 0 3px #FF8FB1;
+      transform: scale(1.2);
+    }
+    .nav-dot .tooltip {
+      position: absolute;
+      left: 24px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: #2F2F2F;
+      color: white;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s;
+      font-weight: 500;
+    }
+    .nav-dot:hover .tooltip { opacity: 1; }
+
+    /* center Vega-Lite charts */
+    .vega-embed { margin: 0 auto !important; display: flex; justify-content: center; }
+    #observablehq-local_races_per_year-582,
+    #observablehq-local_top_jockeys-582,
+    #observablehq-local_avg_weight-582,
+    #observablehq-local_top_trainers-582,
+    #observablehq-local_track_condition-582,
+    #observablehq-racespereyear-582,
+    #observablehq-topwinhorses-582,
+    #observablehq-topjockeys-582,
+    #observablehq-winbetshorses-582,
+    #observablehq-winrpizehorses-582,
+    #observablehq-avgprizetracks-582,
+    #observablehq-totalracesbycountry-582,
+    #observablehq-fastestwinningtime-582,
+    #observablehq-topspeed-582,
+    #observablehq-gb_races_per_year-582,
+    #observablehq-gb_top_horses_wins-582,
+    #observablehq-gb_top_jockeys_wins-582,
+    #observablehq-gb_profit_bets-582,
+    #observablehq-gb_profit_prize-582,
+    #observablehq-gb_top_courses_prize-582,
+    #observablehq-gb_fastest_time-582,
+    #observablehq-gb_topspeed-582,
+    #observablehq-nongb_races_per_year-582,
+    #observablehq-nongb_top_horses_wins-582,
+    #observablehq-nongb_top_jockeys_wins-582,
+    #observablehq-nongb_profit_bets-582,
+    #observablehq-nongb_profit_prize-582,
+    #observablehq-nongb_races_by_country-582,
+    #observablehq-nongb_fastest_time-582,
+    #observablehq-nongb_topspeed-582,
+    #observablehq-sires_wins-582,
+    #observablehq-mares_wins-582,
+    #observablehq-grandsires_wins-582 {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+    }
+
+    @media (max-width: 700px) {
+      .card { max-width: 95%; }
+      .dot-nav { left: 5px; gap: 12px; }
+      .nav-dot .tooltip { font-size: 0.65rem; left: 20px; }
+      #map { height: 350px; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="hero">
+  <h1>Horse Racing Insights</h1>
+  <p>Discover what makes a winning horse</p>
+</header>
+
+<div class="container">
+
+  <!-- CONTENT -->
+  <div class="content">
+
+    <!-- Welcome -->
+    <section id="section-welcome" class="card section">
+      <h2>Welcome to Horse Racing Insights</h2>
+      <p>Dive into the world of horse racing with data‑driven insights. Explore trends, favorites, and locations of races across the years.</p>
+    </section>
+
+    <!-- GENERAL SECTION -->
+    <section id="section-general" class="card section">
+      <div class="flex-row" style="margin-bottom: 1rem;">
+        <h2 style="margin-bottom: 0;">General Insights</h2>
+        <div class="tab-group">
+          <button id="tabOverall" class="tab-btn active">Overall</button>
+          <button id="tabGB" class="tab-btn">Great Britain</button>
+          <button id="tabNonGB" class="tab-btn">Rest of World</button>
+        </div>
+      </div>
+
+      <div id="overall-charts">
+        <div class="vis-card"><div class="vis-title">Races Per Year</div><div class="vis-description">Total number of races held each year from 1990 to 2020.</div><div id="observablehq-racespereyear-582"></div></div>
+        <div class="vis-card"><div class="vis-title">Top 10 Horses By Wins</div><div class="vis-description">Horses with the most first‑place finishes.</div><div id="observablehq-topwinhorses-582"></div></div>
+        <div class="vis-card"><div class="vis-title">Top 10 Jockeys By Wins</div><div class="vis-description">Jockeys with the highest number of winning rides.</div><div id="observablehq-topjockeys-582"></div></div>
+        <div class="vis-card"><div class="vis-title">Profits From Win Bets (CAD)</div><div class="vis-description">Simulated profit if you had placed a £1 win bet on each horse.</div><div id="observablehq-winbetshorses-582"></div></div>
+        <div class="vis-card"><div class="vis-title">Total Prize Money From Wins (CAD)</div><div class="vis-description">Cumulative prize money earned by horses from their winning races.</div><div id="observablehq-winrpizehorses-582"></div></div>
+        <div class="vis-card"><div class="vis-title">Top Racecourses By Average Prize (CAD)</div><div class="vis-description">Racecourses where the average prize money is highest.</div><div id="observablehq-avgprizetracks-582"></div></div>
+        <div class="vis-card"><div class="vis-title">Total Races By Country</div><div class="vis-description">Distribution of all races across countries.</div><div id="observablehq-totalracesbycountry-582"></div></div>
+        <div class="vis-card"><div class="vis-title">Fastest Winning Time Per Year (seconds)</div><div class="vis-description">The fastest recorded winning time each year.</div><div id="observablehq-fastestwinningtime-582"></div></div>
+        <div class="vis-card"><div class="vis-title">Highest Top Speed Per Year (TR)</div><div class="vis-description">Peak speed rating achieved in any race each year.</div><div id="observablehq-topspeed-582"></div></div>
+      </div>
+
+      <div id="gb-charts" style="display: none;">
+        <div class="vis-card"><div class="vis-title">Races Per Year (Great Britain)</div><div id="observablehq-gb_races_per_year-582"></div></div>
+        <div class="vis-card"><div class="vis-title">Top Horses By Wins (Great Britain)</div><div id="observablehq-gb_top_horses_wins-582"></div></div>
+        <div class="vis-card"><div class="vis-title">Top Jockeys By Wins (Great Britain)</div><div id="observablehq-gb_top_jockeys_wins-582"></div></div>
+        <div class="vis-card"><div class="vis-title">Profit From Bets (Great Britain)</div><div id="observablehq-gb_profit_bets-582"></div></div>
+        <div class="vis-card"><div class="vis-title">Prize Money (Great Britain)</div><div id="observablehq-gb_profit_prize-582"></div></div>
+        <div class="vis-card"><div class="vis-title">Top Courses By Prize (Great Britain)</div><div id="observablehq-gb_top_courses_prize-582"></div></div>
+        <div class="vis-card"><div class="vis-title">Fastest Time (Great Britain)</div><div id="observablehq-gb_fastest_time-582"></div></div>
+        <div class="vis-card"><div class="vis-title">Top Speed (Great Britain)</div><div id="observablehq-gb_topspeed-582"></div></div>
+      </div>
+
+      <div id="nongb-charts" style="display: none;">
+        <div class="vis-card"><div class="vis-title">Races Per Year (Rest of World)</div><div id="observablehq-nongb_races_per_year-582"></div></div>
+        <div class="vis-card"><div class="vis-title">Top Horses By Wins (Rest of World)</div><div id="observablehq-nongb_top_horses_wins-582"></div></div>
+        <div class="vis-card"><div class="vis-title">Top Jockeys By Wins (Rest of World)</div><div id="observablehq-nongb_top_jockeys_wins-582"></div></div>
+        <div class="vis-card"><div class="vis-title">Profit From Bets (Rest of World)</div><div id="observablehq-nongb_profit_bets-582"></div></div>
+        <div class="vis-card"><div class="vis-title">Prize Money (Rest of World)</div><div id="observablehq-nongb_profit_prize-582"></div></div>
+        <div class="vis-card"><div class="vis-title">Races By Country (Rest of World)</div><div id="observablehq-nongb_races_by_country-582"></div></div>
+        <div class="vis-card"><div class="vis-title">Fastest Time (Rest of World)</div><div id="observablehq-nongb_fastest_time-582"></div></div>
+        <div class="vis-card"><div class="vis-title">Top Speed (Rest of World)</div><div id="observablehq-nongb_topspeed-582"></div></div>
+      </div>
+    </section>
+
+    <!-- LOCAL SECTION -->
+    <section id="section-local" class="card section">
+      <h2>Course‑Specific Insights</h2>
+      <p><em>Click any marker on the map below or use the dropdown menu to explore detailed data for a specific racecourse.</em></p>
+
+      <select id="courseDropdown" class="course-selector">
+        <option value="">-- Select a racecourse --</option>
+      </select>
+
+      <div id="map"></div>
+
+      <div style="margin-top: 30px;">
+        <div class="vis-card">
+          <div class="vis-title" id="local-races-title">Races Per Year (Selected Course)</div>
+          <div class="vis-description">Yearly number of races held at the chosen course.</div>
+          <div id="observablehq-local_races_per_year-582"></div>
+        </div>
+        <div class="vis-card">
+          <div class="vis-title" id="local-jockeys-title">Top 5 Jockeys At Selected Course</div>
+          <div class="vis-description">Jockeys with the most wins at this specific racecourse.</div>
+          <div id="observablehq-local_top_jockeys-582"></div>
+        </div>
+        <div class="vis-card">
+          <div class="vis-title" id="local-weight-title">Average Weight Per Year (Selected Course)</div>
+          <div class="vis-description">Mean weight of horses competing at the course each year.</div>
+          <div id="observablehq-local_avg_weight-582"></div>
+        </div>
+        <div class="vis-card">
+          <div class="vis-title" id="local-trainers-title">Top 5 Trainers At Selected Course</div>
+          <div class="vis-description">Trainers whose horses win most often at this course.</div>
+          <div id="observablehq-local_top_trainers-582"></div>
+        </div>
+        <div class="vis-card">
+          <div class="vis-title" id="local-condition-title">Track Condition Distribution (Selected Course)</div>
+          <div class="vis-description">Proportion of races run on different ground conditions.</div>
+          <div id="observablehq-local_track_condition-582"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LINEAGE SECTION -->
+    <section id="section-lineage" class="card section">
+      <h2>Lineage Analysis</h2>
+      <div class="vis-card">
+        <div class="vis-title">Top 10 Sires (Fathers) By Wins</div>
+        <div class="vis-description">Fathers whose offspring have the most total wins.</div>
+        <div id="observablehq-sires_wins-582"></div>
+      </div>
+      <div class="vis-card">
+        <div class="vis-title">Top 10 Mares (Mothers) By Wins</div>
+        <div class="vis-description">Mothers whose offspring are most successful.</div>
+        <div id="observablehq-mares_wins-582"></div>
+      </div>
+      <div class="vis-card">
+        <div class="vis-title">Top 10 Grandsires By Wins</div>
+        <div class="vis-description">Grandfathers whose descendants have the most wins.</div>
+        <div id="observablehq-grandsires_wins-582"></div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- RIGHT: TRACK -->
+  <div class="track">
+    <img src="track.png" class="track-img" alt="track">
+    <img src="horse.png" id="horse" alt="horse">
+  </div>
+</div>
+
+<footer>
+  IAT355 Visual Analytics - Horse Racing | aky6 | <a href="https://observablehq.com/d/b4374c2e7ce71428@582" target="_blank" style="color:white;">HORSE with estimates final by sfu</a>
+</footer>
+
+<!-- DOT NAVIGATION -->
+<div class="dot-nav">
+  <div class="nav-dot" data-section="section-welcome"><span class="tooltip">Welcome</span></div>
+  <div class="nav-dot" data-section="section-general"><span class="tooltip">General</span></div>
+  <div class="nav-dot" data-section="section-local"><span class="tooltip">Course Insights</span></div>
+  <div class="nav-dot" data-section="section-lineage"><span class="tooltip">Lineage</span></div>
+</div>
+
+<script>
+  // ========== LEAFLET MAP & DYNAMIC DROPDOWN (FIXED) ==========
+  const map = L.map('map', {
+    worldCopyJump: false,
+    maxBounds: [[-85, -180], [85, 180]],
+    maxBoundsViscosity: 1.0
+  }).setView([52.5, -1.5], 6);
+
+  L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
+    attribution: 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012',
+    noWrap: true
+  }).addTo(map);
+
+  let allCourses = [];
+
+  // Function to update the selected course in Observable
+  function updateSelectedCourseInObservable(courseName) {
+    if (!courseName) return;
+    console.log(`Updating selected course to: ${courseName}`);
+
+    // Update chart titles
+    document.getElementById('local-races-title').innerHTML = `Races Per Year (${courseName})`;
+    document.getElementById('local-jockeys-title').innerHTML = `Top 5 Jockeys At ${courseName}`;
+    document.getElementById('local-weight-title').innerHTML = `Average Weight Per Year (${courseName})`;
+    document.getElementById('local-trainers-title').innerHTML = `Top 5 Trainers At ${courseName}`;
+    document.getElementById('local-condition-title').innerHTML = `Track Condition Distribution (${courseName})`;
+
+    // Update dropdown to match
+    const dropdown = document.getElementById('courseDropdown');
+    if (dropdown) dropdown.value = courseName;
+
+    // Update Observable input
+    if (window.selectedCourseInput) {
+      window.selectedCourseInput.value = courseName;
+      window.selectedCourseInput.dispatchEvent(new Event('input', { bubbles: true }));
+    } else {
+      // Fallback: find the select element directly
+      const selectEl = document.querySelector('#observablehq-viewof_selectedCourse select, #observablehq-viewof_selectedCourse input');
+      if (selectEl) {
+        selectEl.value = courseName;
+        selectEl.dispatchEvent(new Event('input', { bubbles: true }));
+      }
+    }
+  }
+
+  // Populate dropdown alphabetically
+  function populateDropdown(courses) {
+    const dropdown = document.getElementById('courseDropdown');
+    const sorted = [...courses].sort((a, b) => a.name.localeCompare(b.name));
+    dropdown.innerHTML = '<option value="">-- Select a racecourse --</option>';
+    sorted.forEach(course => {
+      const option = document.createElement('option');
+      option.value = course.name;
+      option.textContent = course.name;
+      dropdown.appendChild(option);
+    });
+  }
+
+  // Load courses from JSON (with fallback)
+  fetch('data/racecourses.json')
+    .then(response => response.json())
+    .then(raceCourses => {
+      console.log(`Loaded ${raceCourses.length} racecourses`);
+      allCourses = raceCourses;
+      populateDropdown(allCourses);
+      raceCourses.forEach(course => {
+        L.marker([course.lat, course.lng]).addTo(map)
+          .bindPopup(course.name + " Racecourse")
+          .on('click', () => updateSelectedCourseInObservable(course.name));
+      });
+    })
+    .catch(error => {
+      console.error('Error loading racecourses:', error);
+      // Extended fallback courses (many from the dataset)
+      const fallbackCourses = [
+        { name: "Ascot", lat: 51.4096, lng: -0.5856 },
+        { name: "Cheltenham", lat: 51.9194, lng: -2.0581 },
+        { name: "Newmarket", lat: 52.2446, lng: 0.4074 },
+        { name: "Epsom", lat: 51.3233, lng: -0.2833 },
+        { name: "York", lat: 53.9626, lng: -1.0819 },
+        { name: "Aintree", lat: 53.4769, lng: -2.9444 },
+        { name: "Curragh (IRE)", lat: 53.15, lng: -6.75 },
+        { name: "Leopardstown (IRE)", lat: 53.2667, lng: -6.1667 },
+        { name: "Fairyhouse (IRE)", lat: 53.4348, lng: -6.3817 },
+        { name: "Punchestown (IRE)", lat: 53.2279, lng: -6.6090 },
+        { name: "Tramore (IRE)", lat: 52.1583, lng: -7.1526 },
+        { name: "Naas (IRE)", lat: 53.2158, lng: -6.6545 },
+        { name: "Gowran Park (IRE)", lat: 52.6321, lng: -7.0641 },
+        { name: "Limerick (IRE)", lat: 52.6537, lng: -8.6547 },
+        { name: "Thurles (IRE)", lat: 52.6778, lng: -7.8345 },
+        { name: "Down Royal (IRE)", lat: 54.5072, lng: -6.1678 },
+        { name: "Sligo (IRE)", lat: 54.2586, lng: -8.4761 },
+        { name: "Ballinrobe (IRE)", lat: 53.6343, lng: -9.2337 },
+        { name: "Wexford (IRE)", lat: 52.3347, lng: -6.4549 },
+        { name: "Killarney (IRE)", lat: 52.0599, lng: -9.5042 },
+        { name: "Galway (IRE)", lat: 53.2707, lng: -9.0587 },
+        { name: "Listowel (IRE)", lat: 52.4444, lng: -9.4852 },
+        { name: "Bellewstown (IRE)", lat: 53.6611, lng: -6.3483 },
+        { name: "Downpatrick (IRE)", lat: 54.3286, lng: -5.7153 },
+        { name: "Clonmel (IRE)", lat: 52.3518, lng: -7.7037 },
+        { name: "Tipperary (IRE)", lat: 52.4731, lng: -8.1611 },
+        { name: "Roscommon (IRE)", lat: 53.6262, lng: -8.1918 },
+        { name: "Kilbeggan (IRE)", lat: 53.3715, lng: -7.4935 }
+      ];
+      allCourses = fallbackCourses;
+      populateDropdown(allCourses);
+      fallbackCourses.forEach(course => {
+        L.marker([course.lat, course.lng]).addTo(map)
+          .bindPopup(course.name + " Racecourse")
+          .on('click', () => updateSelectedCourseInObservable(course.name));
+      });
+    });
+
+  // Dropdown change event
+  document.getElementById('courseDropdown').addEventListener('change', (e) => {
+    if (e.target.value) updateSelectedCourseInObservable(e.target.value);
+  });
+
+  // ========== TAB LOGIC ==========
+  const tabOverall = document.getElementById('tabOverall');
+  const tabGB = document.getElementById('tabGB');
+  const tabNonGB = document.getElementById('tabNonGB');
+  const overallCharts = document.getElementById('overall-charts');
+  const gbCharts = document.getElementById('gb-charts');
+  const nongbCharts = document.getElementById('nongb-charts');
+
+  function updateGeneralCharts(view) {
+    if (view === 'overall') {
+      overallCharts.style.display = 'block';
+      gbCharts.style.display = 'none';
+      nongbCharts.style.display = 'none';
+    } else if (view === 'gb') {
+      overallCharts.style.display = 'none';
+      gbCharts.style.display = 'block';
+      nongbCharts.style.display = 'none';
+    } else if (view === 'nongb') {
+      overallCharts.style.display = 'none';
+      gbCharts.style.display = 'none';
+      nongbCharts.style.display = 'block';
+    }
+  }
+
+  tabOverall.addEventListener('click', () => {
+    tabOverall.classList.add('active');
+    tabGB.classList.remove('active');
+    tabNonGB.classList.remove('active');
+    updateGeneralCharts('overall');
+  });
+  tabGB.addEventListener('click', () => {
+    tabGB.classList.add('active');
+    tabOverall.classList.remove('active');
+    tabNonGB.classList.remove('active');
+    updateGeneralCharts('gb');
+  });
+  tabNonGB.addEventListener('click', () => {
+    tabNonGB.classList.add('active');
+    tabOverall.classList.remove('active');
+    tabGB.classList.remove('active');
+    updateGeneralCharts('nongb');
+  });
+  updateGeneralCharts('overall');
+
+  // ========== SCROLL HORSE ==========
+  const horse = document.getElementById('horse');
+  let isDragging = false;
+  let startY = 0, startScrollY = 0;
+
+  function updateHorsePosition() {
+    const scrollTop = window.scrollY;
+    const docHeight = document.body.scrollHeight - window.innerHeight;
+    const progress = docHeight === 0 ? 0 : scrollTop / docHeight;
+    const trackHeight = window.innerHeight - 100;
+    const horseY = Math.min(trackHeight, Math.max(0, progress * trackHeight));
+    horse.style.top = horseY + 'px';
+  }
+
+  window.addEventListener('scroll', updateHorsePosition);
+  horse.addEventListener('mousedown', (e) => {
+    e.preventDefault();
+    isDragging = true;
+    startY = e.clientY;
+    startScrollY = window.scrollY;
+    horse.style.cursor = 'grabbing';
+  });
+  document.addEventListener('mousemove', (e) => {
+    if (!isDragging) return;
+    const deltaY = e.clientY - startY;
+    const trackHeight = window.innerHeight - 100;
+    const scrollRange = document.body.scrollHeight - window.innerHeight;
+    const scrollDelta = (deltaY / trackHeight) * scrollRange;
+    window.scrollTo(0, startScrollY + scrollDelta);
+  });
+  document.addEventListener('mouseup', () => {
+    isDragging = false;
+    horse.style.cursor = 'grab';
+  });
+  updateHorsePosition();
+
+  // ========== DOT NAVIGATION ==========
+  const dots = document.querySelectorAll('.nav-dot');
+  const sections = Array.from(dots).map(dot => document.getElementById(dot.dataset.section));
+  function updateActiveDot() {
+    const scrollPos = window.scrollY + 150;
+    let activeIndex = 0;
+    for (let i = 0; i < sections.length; i++) {
+      if (sections[i] && sections[i].offsetTop <= scrollPos) activeIndex = i;
+      else break;
+    }
+    dots.forEach((dot, idx) => {
+      if (idx === activeIndex) dot.classList.add('active');
+      else dot.classList.remove('active');
+    });
+  }
+  window.addEventListener('scroll', updateActiveDot);
+  updateActiveDot();
+  dots.forEach((dot, idx) => {
+    dot.addEventListener('click', () => {
+      if (sections[idx]) sections[idx].scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
+<script type="module">
+import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@5/dist/runtime.js";
+import define from "https://api.observablehq.com/d/b4374c2e7ce71428@582.js?v=4";
+
+window.runtime = new Runtime().module(define, name => {
+  if (name === "coursesList") return;
+  if (name === "viewof selectedCourse") {
+    // Capture the input element for later use
+    return {
+      fulfilled: (value) => {
+        window.selectedCourseInput = value;
+        return new Inspector(document.createElement('div')); // invisible
+      },
+      rejected: (error) => console.error(error)
+    };
+  }
+  if (name === "filteredByCourse") return;
+  // Overall
+  if (name === "racespereyear") return new Inspector(document.querySelector("#observablehq-racespereyear-582"));
+  if (name === "topwinhorses") return new Inspector(document.querySelector("#observablehq-topwinhorses-582"));
+  if (name === "topjockeys") return new Inspector(document.querySelector("#observablehq-topjockeys-582"));
+  if (name === "winbetshorses") return new Inspector(document.querySelector("#observablehq-winbetshorses-582"));
+  if (name === "winrpizehorses") return new Inspector(document.querySelector("#observablehq-winrpizehorses-582"));
+  if (name === "avgprizetracks") return new Inspector(document.querySelector("#observablehq-avgprizetracks-582"));
+  if (name === "totalracesbycountry") return new Inspector(document.querySelector("#observablehq-totalracesbycountry-582"));
+  if (name === "fastestwinningtime") return new Inspector(document.querySelector("#observablehq-fastestwinningtime-582"));
+  if (name === "topspeed") return new Inspector(document.querySelector("#observablehq-topspeed-582"));
+  // GB
+  if (name === "gb_races_per_year") return new Inspector(document.querySelector("#observablehq-gb_races_per_year-582"));
+  if (name === "gb_top_horses_wins") return new Inspector(document.querySelector("#observablehq-gb_top_horses_wins-582"));
+  if (name === "gb_top_jockeys_wins") return new Inspector(document.querySelector("#observablehq-gb_top_jockeys_wins-582"));
+  if (name === "gb_profit_bets") return new Inspector(document.querySelector("#observablehq-gb_profit_bets-582"));
+  if (name === "gb_profit_prize") return new Inspector(document.querySelector("#observablehq-gb_profit_prize-582"));
+  if (name === "gb_top_courses_prize") return new Inspector(document.querySelector("#observablehq-gb_top_courses_prize-582"));
+  if (name === "gb_fastest_time") return new Inspector(document.querySelector("#observablehq-gb_fastest_time-582"));
+  if (name === "gb_topspeed") return new Inspector(document.querySelector("#observablehq-gb_topspeed-582"));
+  // Non-GB
+  if (name === "nongb_races_per_year") return new Inspector(document.querySelector("#observablehq-nongb_races_per_year-582"));
+  if (name === "nongb_top_horses_wins") return new Inspector(document.querySelector("#observablehq-nongb_top_horses_wins-582"));
+  if (name === "nongb_top_jockeys_wins") return new Inspector(document.querySelector("#observablehq-nongb_top_jockeys_wins-582"));
+  if (name === "nongb_profit_bets") return new Inspector(document.querySelector("#observablehq-nongb_profit_bets-582"));
+  if (name === "nongb_profit_prize") return new Inspector(document.querySelector("#observablehq-nongb_profit_prize-582"));
+  if (name === "nongb_races_by_country") return new Inspector(document.querySelector("#observablehq-nongb_races_by_country-582"));
+  if (name === "nongb_fastest_time") return new Inspector(document.querySelector("#observablehq-nongb_fastest_time-582"));
+  if (name === "nongb_topspeed") return new Inspector(document.querySelector("#observablehq-nongb_topspeed-582"));
+  // Local
+  if (name === "local_races_per_year") return new Inspector(document.querySelector("#observablehq-local_races_per_year-582"));
+  if (name === "local_top_jockeys") return new Inspector(document.querySelector("#observablehq-local_top_jockeys-582"));
+  if (name === "local_avg_weight") return new Inspector(document.querySelector("#observablehq-local_avg_weight-582"));
+  if (name === "local_top_trainers") return new Inspector(document.querySelector("#observablehq-local_top_trainers-582"));
+  if (name === "local_track_condition") return new Inspector(document.querySelector("#observablehq-local_track_condition-582"));
+  // Lineage
+  if (name === "sires_wins") return new Inspector(document.querySelector("#observablehq-sires_wins-582"));
+  if (name === "mares_wins") return new Inspector(document.querySelector("#observablehq-mares_wins-582"));
+  if (name === "grandsires_wins") return new Inspector(document.querySelector("#observablehq-grandsires_wins-582"));
+});
+</script>
+</body>
+</html>

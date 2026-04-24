@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Horse Racing Insights</title>
+
+  <!-- Vega-Lite -->
+  <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+
+  <!-- Leaflet -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Segoe UI", system-ui, sans-serif;
+      background: #F5E6D3;
+      color: #2F2F2F;
+    }
+
+    /* layout */
+    .container {
+      display: flex;
+      position: relative;
+    }
+
+    .content {
+      width: 98%;
+      padding: 2rem 2rem 4rem 2rem;
+      background: #F5E6D3;
+    }
+
+    .track {
+      width: 2%;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      background: #F5E6D3;
+      overflow: hidden;
+      border-left: 1px solid #6DBE8A;
+    }
+
+    /* track visuals */
+    .track-img {
+      position: absolute;
+      height: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: auto;
+    }
+
+    #horse {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 40px;
+      transition: top 0.05s linear;
+      cursor: grab;
+      user-select: none;
+    }
+
+    #horse:active {
+      cursor: grabbing;
+    }
+
+    /* hero */
+    .hero {
+      background: #6DBE8A;
+      color: #FF8FB1;
+      text-align: center;
+      padding: 40px;
+      border-radius: 0 0 20px 20px;
+      margin-bottom: 30px;
+    }
+
+    .hero h1 {
+      font-size: 2rem;
+      color: white;
+    }
+
+    .hero p {
+      color: #F9F3EF;
+    }
+
+    /* unified card style */
+    .card {
+      background: white;
+      margin: 20px auto;
+      padding: 16px 20px;
+      border-radius: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      border: 2px solid #6DBE8A;
+      max-width: 85%;
+      transition: transform 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+    }
+
+    h2, h3 {
+      color: #FF8FB1;
+      margin-bottom: 12px;
+    }
+
+    h2 {
+      font-size: 1.6rem;
+    }
+
+    h3 {
+      font-size: 1.2rem;
+      margin-top: 20px;
+    }
+
+    #map {
+      height: 500px;  /* increased from 380px to make map taller */
+      border-radius: 15px;
+      margin-top: 15px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 24px 16px;
+      color: white;
+      font-size: 0.9rem;
+      background: linear-gradient(135deg, #6DBE8A 0%, #4A9B74 100%);
+      border-top: 1px solid rgba(255,255,255,0.25);
+      box-shadow: 0 -2px 20px rgba(0,0,0,0.08);
+    }
+
+    .chart-placeholder {
+      min-height: 220px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #fafafa;
+      border-radius: 12px;
+      color: #999;
+      font-style: italic;
+      border: 1px dashed #ccc;
+      margin-top: 10px;
+    }
+
+    /* folder tabs - unselected background white, selected green */
+    .tab-group {
+      display: flex;
+      gap: 0;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #6DBE8A;
+    }
+    .tab-btn {
+      background: white;           /* changed from #F5E6D3 to white */
+      border: 2px solid #6DBE8A;
+      border-bottom: none;
+      padding: 8px 24px;
+      border-radius: 12px 12px 0 0;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: all 0.2s;
+      margin-right: 4px;
+      color: #2F2F2F;
+    }
+    .tab-btn.active {
+      background: #6DBE8A;
+      color: white;
+      border-bottom: 2px solid #6DBE8A;
+    }
+    .tab-btn:hover {
+      background: #A8E6CF;
+    }
+
+    /* ----- DOT NAVIGATION (left side) ----- */
+    .dot-nav {
+      position: fixed;
+      left: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      z-index: 1000;
+      background: rgba(245, 230, 211, 0.8);
+      backdrop-filter: blur(4px);
+      padding: 12px 8px;
+      border-radius: 40px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .nav-dot {
+      width: 12px;
+      height: 12px;
+      background: #6DBE8A;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+
+    .nav-dot:hover {
+      transform: scale(1.4);
+      background: #FF8FB1;
+    }
+
+    .nav-dot.active {
+      background: #FF8FB1;
+      box-shadow: 0 0 0 3px #FF8FB1;
+      transform: scale(1.2);
+    }
+
+    .nav-dot .tooltip {
+      position: absolute;
+      left: 24px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: #2F2F2F;
+      color: white;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s;
+      font-weight: 500;
+    }
+
+    .nav-dot:hover .tooltip {
+      opacity: 1;
+    }
+
+    /* responsive */
+    @media (max-width: 700px) {
+      .card {
+        max-width: 95%;
+      }
+      .dot-nav {
+        left: 5px;
+        gap: 12px;
+      }
+      .nav-dot .tooltip {
+        font-size: 0.65rem;
+        left: 20px;
+      }
+      #map {
+        height: 350px;  /* slightly smaller on mobile but still taller than before */
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header class="hero">
+  <h1>Horse Racing Insights</h1>
+  <p>Discover what makes a winning horse</p>
+</header>
+
+<div class="container">
+
+  <!-- LEFT: CONTENT -->
+  <div class="content">
+
+    <!-- Welcome section -->
+    <section id="section-welcome" class="card section">
+      <h2>Welcome to Horse Racing Insights</h2>
+      <p>Dive into the world of horse racing with data-driven insights. Explore trends, favorites, and locations of races across the years.</p>
+    </section>
+
+    <!-- GENERAL SECTION: all general charts inside one connected card -->
+    <section id="section-general" class="card section">
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; margin-bottom: 1rem;">
+        <h2 style="margin-bottom: 0;">General Insights</h2>
+        <div class="tab-group">
+          <button id="tabOverall" class="tab-btn active">Overall</button>
+          <button id="tabGB" class="tab-btn">Great Britain</button>
+        </div>
+      </div>
+
+      <!-- Race Over Time -->
+      <h3>The Race Over Time</h3>
+      <div id="lineChart" class="chart-placeholder">Line chart (races per year) will appear here</div>
+
+      <!-- Top Jockeys -->
+      <h3>Top Jockeys</h3>
+      <div id="barChart" class="chart-placeholder">Bar chart (top jockeys by wins) will appear here</div>
+
+      <!-- Top 10 Horses -->
+      <h3>Top 10 Horses</h3>
+      <div id="topHorsesChart" class="chart-placeholder">Bar chart (top horses by wins) will appear here</div>
+
+      <!-- Top Racecourses by Average Prize -->
+      <h3>Top Racecourses by Average Prize</h3>
+      <div id="topRacecoursesChart" class="chart-placeholder">Bar chart (top racecourses by avg prize) will appear here</div>
+
+      <!-- NEW: Total races by country -->
+      <h3>Total Races by Country</h3>
+      <div id="racesByCountryChart" class="chart-placeholder">Bar chart (races per country) will appear here</div>
+
+      <!-- NEW: Fastest winning time per year -->
+      <h3>Fastest Winning Time per Year</h3>
+      <div id="fastestTimeChart" class="chart-placeholder">Line chart (fastest winning time in seconds) will appear here</div>
+
+      <!-- NEW: Highest top speed per year -->
+      <h3>Highest Top Speed per Year</h3>
+      <div id="topSpeedChart" class="chart-placeholder">Line chart (max speed in km/h) will appear here</div>
+
+    </section>
+
+    <!-- LOCAL SECTION (course-specific) -->
+    <section id="section-local" class="card section">
+      <h2>Course-Specific Insights</h2>
+      <p><em>Click any marker on the map below to see detailed charts for that racecourse.</em></p>
+      <div id="map" class="chart-placeholder" style="min-height: 500px;">Leaflet map will appear here</div>
+      
+      <div style="margin-top: 30px;">
+        <h3>Races per year (selected course)</h3>
+        <div id="localRacesYear" class="chart-placeholder">Line chart (races/year at selected course)</div>
+        
+        <h3>Top 5 jockeys at selected course</h3>
+        <div id="localTopJockeys" class="chart-placeholder">Bar chart (top jockeys)</div>
+        
+        <h3>Average weight per year</h3>
+        <div id="localAvgWeight" class="chart-placeholder">Bar chart (average weight)</div>
+        
+        <h3>Average finishing position (excl. DNF)</h3>
+        <div id="localAvgPosition" class="chart-placeholder">Bar chart (avg finishing position)</div>
+        
+        <h3>Top 5 trainers at selected course</h3>
+        <div id="localTopTrainers" class="chart-placeholder">Bar chart (top trainers)</div>
+        
+        <h3>Track condition distribution</h3>
+        <div id="localTrackCondition" class="chart-placeholder">Pie chart (track conditions)</div>
+      </div>
+    </section>
+
+    <!-- LINEAGE SECTION -->
+    <section id="section-lineage" class="card section">
+      <h2>Lineage Analysis</h2>
+      <div>
+        <h3>Top 10 sires (fathers) by wins</h3>
+        <div id="sireChart" class="chart-placeholder">Bar chart (top sires)</div>
+        
+        <h3>Top 10 mares (mothers) by wins</h3>
+        <div id="mareChart" class="chart-placeholder">Bar chart (top mares)</div>
+        
+        <h3>Top 10 grandsires by wins</h3>
+        <div id="grandsireChart" class="chart-placeholder">Bar chart (top grandsires)</div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- RIGHT: TRACK -->
+  <div class="track">
+    <img src="track.png" class="track-img" alt="track">
+    <img src="horse.png" id="horse" alt="horse">
+  </div>
+</div>
+
+<footer>
+  IAT355 Visual Analytics - Horse Racing | aky6
+</footer>
+
+<!-- DOT NAVIGATION -->
+<div class="dot-nav">
+  <div class="nav-dot" data-section="section-welcome">
+    <span class="tooltip">Welcome</span>
+  </div>
+  <div class="nav-dot" data-section="section-general">
+    <span class="tooltip">General</span>
+  </div>
+  <div class="nav-dot" data-section="section-local">
+    <span class="tooltip">Course Insights</span>
+  </div>
+  <div class="nav-dot" data-section="section-lineage">
+    <span class="tooltip">Lineage</span>
+  </div>
+</div>
+
+<script>
+  // ========== LEAFLET MAP ==========
+  const map = L.map('map', {
+    worldCopyJump: false,
+    maxBounds: [[-85, -180], [85, 180]],
+    maxBoundsViscosity: 1.0
+  }).setView([52.5, -1.5], 6);
+
+  L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
+    attribution: 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012',
+    noWrap: true
+  }).addTo(map);
+
+  // Load racecourses
+  fetch('data/racecourses.json')
+    .then(response => response.json())
+    .then(raceCourses => {
+      console.log(`Loaded ${raceCourses.length} racecourses`);
+      raceCourses.forEach(course => {
+        L.marker([course.lat, course.lng]).addTo(map)
+          .bindPopup(course.name + " Racecourse")
+          .on('click', () => {
+            console.log(`Selected course: ${course.name}`);
+            // future: update local charts
+          });
+      });
+    })
+    .catch(error => {
+      console.error('Error loading racecourses:', error);
+      const fallbackCourses = [
+        { name: "Ascot", lat: 51.4096, lng: -0.5856 },
+        { name: "Cheltenham", lat: 51.9194, lng: -2.0581 },
+        { name: "Newmarket", lat: 52.2446, lng: 0.4074 }
+      ];
+      fallbackCourses.forEach(course => {
+        L.marker([course.lat, course.lng]).addTo(map)
+          .bindPopup(course.name + " Racecourse")
+          .on('click', () => console.log(`Selected course: ${course.name}`));
+      });
+    });
+
+  // ========== GB / OVERALL TOGGLE ==========
+  const tabOverall = document.getElementById('tabOverall');
+  const tabGB = document.getElementById('tabGB');
+  
+  const lineChartDiv = document.getElementById('lineChart');
+  const barChartDiv = document.getElementById('barChart');
+  const topHorsesDiv = document.getElementById('topHorsesChart');
+  const topRacecoursesDiv = document.getElementById('topRacecoursesChart');
+  const racesByCountryDiv = document.getElementById('racesByCountryChart');
+  const fastestTimeDiv = document.getElementById('fastestTimeChart');
+  const topSpeedDiv = document.getElementById('topSpeedChart');
+
+  function updateGeneralCharts(view) {
+    const suffix = view === 'overall' ? 'Overall' : 'Great Britain only';
+    lineChartDiv.innerHTML = `Line chart (races per year – ${suffix}) will appear here`;
+    barChartDiv.innerHTML = `Bar chart (top jockeys by wins – ${suffix}) will appear here`;
+    topHorsesDiv.innerHTML = `Bar chart (top horses by wins – ${suffix}) will appear here`;
+    topRacecoursesDiv.innerHTML = `Bar chart (top racecourses by avg prize – ${suffix}) will appear here`;
+    racesByCountryDiv.innerHTML = `Bar chart (total races by country – ${suffix}) will appear here`;
+    fastestTimeDiv.innerHTML = `Line chart (fastest winning time per year – ${suffix}) will appear here`;
+    topSpeedDiv.innerHTML = `Line chart (highest top speed per year – ${suffix}) will appear here`;
+  }
+
+  tabOverall.addEventListener('click', () => {
+    tabOverall.classList.add('active');
+    tabGB.classList.remove('active');
+    updateGeneralCharts('overall');
+  });
+
+  tabGB.addEventListener('click', () => {
+    tabGB.classList.add('active');
+    tabOverall.classList.remove('active');
+    updateGeneralCharts('gb');
+  });
+
+  updateGeneralCharts('overall');
+
+  // ========== SCROLL HORSE (drag + scroll) ==========
+  const horse = document.getElementById('horse');
+  let isDragging = false;
+  let startY = 0;
+  let startScrollY = 0;
+
+  function updateHorsePosition() {
+    const scrollTop = window.scrollY;
+    const docHeight = document.body.scrollHeight - window.innerHeight;
+    const progress = docHeight === 0 ? 0 : scrollTop / docHeight;
+    const trackHeight = window.innerHeight - 100;
+    const horseY = Math.min(trackHeight, Math.max(0, progress * trackHeight));
+    horse.style.top = horseY + 'px';
+  }
+
+  window.addEventListener('scroll', updateHorsePosition);
+
+  horse.addEventListener('mousedown', (e) => {
+    e.preventDefault();
+    isDragging = true;
+    startY = e.clientY;
+    startScrollY = window.scrollY;
+    horse.style.cursor = 'grabbing';
+  });
+
+  document.addEventListener('mousemove', (e) => {
+    if (!isDragging) return;
+    const deltaY = e.clientY - startY;
+    const trackHeight = window.innerHeight - 100;
+    const scrollRange = document.body.scrollHeight - window.innerHeight;
+    const scrollDelta = (deltaY / trackHeight) * scrollRange;
+    window.scrollTo(0, startScrollY + scrollDelta);
+  });
+
+  document.addEventListener('mouseup', () => {
+    isDragging = false;
+    horse.style.cursor = 'grab';
+  });
+
+  updateHorsePosition();
+
+  // ========== DOT NAVIGATION ==========
+  const dots = document.querySelectorAll('.nav-dot');
+  const sections = Array.from(dots).map(dot => document.getElementById(dot.dataset.section));
+
+  function updateActiveDot() {
+    const scrollPos = window.scrollY + 150;
+    let activeIndex = 0;
+    for (let i = 0; i < sections.length; i++) {
+      if (sections[i] && sections[i].offsetTop <= scrollPos) {
+        activeIndex = i;
+      } else {
+        break;
+      }
+    }
+    dots.forEach((dot, idx) => {
+      if (idx === activeIndex) dot.classList.add('active');
+      else dot.classList.remove('active');
+    });
+  }
+
+  window.addEventListener('scroll', updateActiveDot);
+  window.addEventListener('resize', updateActiveDot);
+  updateActiveDot();
+
+  dots.forEach((dot, idx) => {
+    dot.addEventListener('click', () => {
+      const targetSection = sections[idx];
+      if (targetSection) {
+        targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+</script>
+</body>
+</html>

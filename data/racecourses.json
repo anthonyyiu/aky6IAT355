@@ -1,0 +1,2092 @@
+[
+  {
+    "name": "Aintree",
+    "lat": 53.4769,
+    "lng": -2.9424
+  },
+  {
+    "name": "Aqueduct (USA)",
+    "lat": 40.845,
+    "lng": -73.8267
+  },
+  {
+    "name": "Arawa park (NZ)",
+    "lat": -38.1333,
+    "lng": 176.25
+  },
+  {
+    "name": "Arlington Park (USA)",
+    "lat": 42.0902,
+    "lng": -87.8339
+  },
+  {
+    "name": "Ascot",
+    "lat": 51.4096,
+    "lng": -0.5856
+  },
+  {
+    "name": "Ascot (AUS)",
+    "lat": -31.9505,
+    "lng": 115.8605
+  },
+  {
+    "name": "Ascot (gb) (ARAB)",
+    "lat": 51.4096,
+    "lng": -0.5856
+  },
+  {
+    "name": "Auteuil (FR)",
+    "lat": 48.8561,
+    "lng": 2.2495
+  },
+  {
+    "name": "Awapuni (NZ)",
+    "lat": -40.4167,
+    "lng": 175.6167
+  },
+  {
+    "name": "Ayr",
+    "lat": 55.4667,
+    "lng": -4.6333
+  },
+  {
+    "name": "Baden-Baden (GER)",
+    "lat": 48.7569,
+    "lng": 8.2418
+  },
+  {
+    "name": "Ballarat (AUS)",
+    "lat": -37.563,
+    "lng": 143.8505
+  },
+  {
+    "name": "Ballinrobe (IRE)",
+    "lat": 53.5667,
+    "lng": -9.2667
+  },
+  {
+    "name": "Bangor-on-Dee",
+    "lat": 52.9375,
+    "lng": -3.0875
+  },
+  {
+    "name": "Bath",
+    "lat": 51.3781,
+    "lng": -2.3708
+  },
+  {
+    "name": "Bath (GB) (ARAB)",
+    "lat": 51.3781,
+    "lng": -2.3708
+  },
+  {
+    "name": "Bellewstown (IRE)",
+    "lat": 53.6,
+    "lng": -6.45
+  },
+  {
+    "name": "Belmont Park (Perth) (AUS)",
+    "lat": 40.8514,
+    "lng": -73.8233
+  },
+  {
+    "name": "Belmont Park (USA)",
+    "lat": 40.8514,
+    "lng": -73.8233
+  },
+  {
+    "name": "Bendigo (AUS)",
+    "lat": -36.7597,
+    "lng": 144.2711
+  },
+  {
+    "name": "Beverley",
+    "lat": 53.8333,
+    "lng": -0.4333
+  },
+  {
+    "name": "Brighton",
+    "lat": 50.8278,
+    "lng": -0.1528
+  },
+  {
+    "name": "Brighton (gb) (ARAB)",
+    "lat": 50.8278,
+    "lng": -0.1528
+  },
+  {
+    "name": "Bro Park (SWE)",
+    "lat": 59.3333,
+    "lng": 17.8667
+  },
+  {
+    "name": "Canterbury Park (AUS)",
+    "lat": -33.9094,
+    "lng": 151.1131
+  },
+  {
+    "name": "Canterbury Park (USA)",
+    "lat": -33.9094,
+    "lng": 151.1131
+  },
+  {
+    "name": "Capannelle (ITY)",
+    "lat": 41.8832,
+    "lng": 12.5664
+  },
+  {
+    "name": "Carlisle",
+    "lat": 54.8942,
+    "lng": -2.937
+  },
+  {
+    "name": "Cartmel",
+    "lat": 54.3333,
+    "lng": -3.0333
+  },
+  {
+    "name": "Catterick",
+    "lat": 54.3753,
+    "lng": -1.6312
+  },
+  {
+    "name": "Caulfield (AUS)",
+    "lat": -37.8926,
+    "lng": 144.9997
+  },
+  {
+    "name": "Century Mile (CAN)",
+    "lat": 53.4631,
+    "lng": -113.5067
+  },
+  {
+    "name": "Chantilly (FR)",
+    "lat": 49.1929,
+    "lng": 2.3964
+  },
+  {
+    "name": "Chantilly (fr) (ARAB)",
+    "lat": 49.1929,
+    "lng": 2.3964
+  },
+  {
+    "name": "Chelmsford (AW)",
+    "lat": 51.7742,
+    "lng": 0.4411
+  },
+  {
+    "name": "Chelmsford (AW) (GB) (ARAB)",
+    "lat": 51.7742,
+    "lng": 0.4411
+  },
+  {
+    "name": "Cheltenham",
+    "lat": 51.9194,
+    "lng": -2.0581
+  },
+  {
+    "name": "Cheltenham (AUS)",
+    "lat": 51.9194,
+    "lng": -2.0581
+  },
+  {
+    "name": "Chepstow",
+    "lat": 51.6403,
+    "lng": -2.6767
+  },
+  {
+    "name": "Chepstow (GB) (ARAB)",
+    "lat": 51.6403,
+    "lng": -2.6767
+  },
+  {
+    "name": "Chester",
+    "lat": 53.2036,
+    "lng": -2.8835
+  },
+  {
+    "name": "Chester (gb) (ARAB)",
+    "lat": 53.2036,
+    "lng": -2.8835
+  },
+  {
+    "name": "Chukyo (JPN)",
+    "lat": 35.1217,
+    "lng": 136.9633
+  },
+  {
+    "name": "Churchill Downs (USA)",
+    "lat": 38.2137,
+    "lng": -85.768
+  },
+  {
+    "name": "Cidade Jardim (BRZ)",
+    "lat": -23.5505,
+    "lng": -46.6333
+  },
+  {
+    "name": "Clairefontaine (FR)",
+    "lat": 49.2231,
+    "lng": 0.4892
+  },
+  {
+    "name": "Clonmel (IRE)",
+    "lat": 52.35,
+    "lng": -7.7167
+  },
+  {
+    "name": "Cologne (GER)",
+    "lat": 51.0459,
+    "lng": 6.9607
+  },
+  {
+    "name": "Compiegne (FR)",
+    "lat": 49.4195,
+    "lng": 2.8061
+  },
+  {
+    "name": "Cork (IRE)",
+    "lat": 52.1333,
+    "lng": -8.5667
+  },
+  {
+    "name": "Cranbourne (AUS)",
+    "lat": -38.1267,
+    "lng": 145.21
+  },
+  {
+    "name": "Curragh (IRE)",
+    "lat": 53.3667,
+    "lng": -6.75
+  },
+  {
+    "name": "Curragh (IRE) (ARAB)",
+    "lat": 53.3667,
+    "lng": -6.75
+  },
+  {
+    "name": "Deauville (FR)",
+    "lat": 49.3495,
+    "lng": 0.0877
+  },
+  {
+    "name": "Del Mar (USA)",
+    "lat": 32.5807,
+    "lng": -117.2724
+  },
+  {
+    "name": "Dieppe (FR)",
+    "lat": 49.9265,
+    "lng": 1.081
+  },
+  {
+    "name": "Doncaster",
+    "lat": 53.5228,
+    "lng": -1.1136
+  },
+  {
+    "name": "Doncaster (GB) (ARAB)",
+    "lat": 53.5228,
+    "lng": -1.1136
+  },
+  {
+    "name": "Doomben (AUS)",
+    "lat": -27.4239,
+    "lng": 153.0839
+  },
+  {
+    "name": "Dortmund (GER)",
+    "lat": 51.5136,
+    "lng": 7.4653
+  },
+  {
+    "name": "Down Royal (IRE)",
+    "lat": 54.4333,
+    "lng": -6.0667
+  },
+  {
+    "name": "Downpatrick (IRE)",
+    "lat": 54.3333,
+    "lng": -5.7167
+  },
+  {
+    "name": "Dundalk (AW) (IRE)",
+    "lat": 54,
+    "lng": -6.4167
+  },
+  {
+    "name": "Dundalk (IRE)",
+    "lat": 54,
+    "lng": -6.4167
+  },
+  {
+    "name": "Durbanville (SAF)",
+    "lat": -33.8403,
+    "lng": 18.6353
+  },
+  {
+    "name": "Dusseldorf (GER)",
+    "lat": 51.436,
+    "lng": 6.7461
+  },
+  {
+    "name": "Eagle Farm (AUS)",
+    "lat": -27.3606,
+    "lng": 153.0956
+  },
+  {
+    "name": "Ellerslie (NZ)",
+    "lat": -37.815,
+    "lng": 174.8317
+  },
+  {
+    "name": "Enghien (FR)",
+    "lat": 48.9704,
+    "lng": 2.3106
+  },
+  {
+    "name": "Epsom",
+    "lat": 51.3233,
+    "lng": -0.2833
+  },
+  {
+    "name": "Exeter",
+    "lat": 50.7172,
+    "lng": -3.4708
+  },
+  {
+    "name": "Exeter (gb) (ARAB)",
+    "lat": 50.7172,
+    "lng": -3.4708
+  },
+  {
+    "name": "Fair Grounds (USA)",
+    "lat": 30.1158,
+    "lng": -90.1117
+  },
+  {
+    "name": "Fairview (SAF)",
+    "lat": -34.0161,
+    "lng": 18.6642
+  },
+  {
+    "name": "Fairyhouse (IRE)",
+    "lat": 53.5,
+    "lng": -6.15
+  },
+  {
+    "name": "Fakenham",
+    "lat": 52.8667,
+    "lng": 0.8667
+  },
+  {
+    "name": "Fakenham (GB) (ARAB)",
+    "lat": 52.8667,
+    "lng": 0.8667
+  },
+  {
+    "name": "Ffos Las",
+    "lat": 51.8,
+    "lng": -4.0833
+  },
+  {
+    "name": "Ffos Las (GB) (ARAB)",
+    "lat": 51.8,
+    "lng": -4.0833
+  },
+  {
+    "name": "Flemington (AUS)",
+    "lat": -37.8064,
+    "lng": 144.959
+  },
+  {
+    "name": "Fontainebleau (FR)",
+    "lat": 48.4028,
+    "lng": 2.6992
+  },
+  {
+    "name": "Fontwell",
+    "lat": 50.8572,
+    "lng": -0.4817
+  },
+  {
+    "name": "Fontwell (gb) (ARAB)",
+    "lat": 50.8572,
+    "lng": -0.4817
+  },
+  {
+    "name": "Fort Erie (CAN)",
+    "lat": 42.9937,
+    "lng": -79.0374
+  },
+  {
+    "name": "Frankfurt (GER)",
+    "lat": 50.0951,
+    "lng": 8.6827
+  },
+  {
+    "name": "Galway (IRE)",
+    "lat": 53.2667,
+    "lng": -9.0167
+  },
+  {
+    "name": "Gavea (BRZ)",
+    "lat": -23.0096,
+    "lng": -43.2871
+  },
+  {
+    "name": "Geelong (AUS)",
+    "lat": -38.1502,
+    "lng": 144.3616
+  },
+  {
+    "name": "Ghlin (BEL)",
+    "lat": 50.5833,
+    "lng": 3.9333
+  },
+  {
+    "name": "Gold Coast (AUS)",
+    "lat": -27.9758,
+    "lng": 153.4269
+  },
+  {
+    "name": "Golden Gate Fields (USA)",
+    "lat": 37.9308,
+    "lng": -122.2983
+  },
+  {
+    "name": "Goodwood",
+    "lat": 50.8714,
+    "lng": -0.6786
+  },
+  {
+    "name": "Goodwood (GB) (ARAB)",
+    "lat": 50.8714,
+    "lng": -0.6786
+  },
+  {
+    "name": "Gowran Park (IRE)",
+    "lat": 52.45,
+    "lng": -7.05
+  },
+  {
+    "name": "Grafton (AUS)",
+    "lat": -29.1779,
+    "lng": 152.935
+  },
+  {
+    "name": "Greyville (SAF)",
+    "lat": -29.8261,
+    "lng": 30.945
+  },
+  {
+    "name": "Gulfstream Park (USA)",
+    "lat": 26.0139,
+    "lng": -80.2356
+  },
+  {
+    "name": "Hamburg (GER)",
+    "lat": 53.5582,
+    "lng": 9.9482
+  },
+  {
+    "name": "Hanshin (JPN)",
+    "lat": 34.8189,
+    "lng": 135.2981
+  },
+  {
+    "name": "Happy Valley (HK)",
+    "lat": 22.2786,
+    "lng": 114.1816
+  },
+  {
+    "name": "Hastings (NZ)",
+    "lat": -39.6442,
+    "lng": 176.8497
+  },
+  {
+    "name": "Haydock",
+    "lat": 53.4678,
+    "lng": -2.6603
+  },
+  {
+    "name": "Hereford",
+    "lat": 52.0567,
+    "lng": -2.7167
+  },
+  {
+    "name": "Hereford (GB) (ARAB)",
+    "lat": 52.0567,
+    "lng": -2.7167
+  },
+  {
+    "name": "Hexham",
+    "lat": 54.9736,
+    "lng": -2.1039
+  },
+  {
+    "name": "Hobart (AUS)",
+    "lat": -42.8821,
+    "lng": 147.3272
+  },
+  {
+    "name": "Huntingdon",
+    "lat": 52.33,
+    "lng": -0.1867
+  },
+  {
+    "name": "Huntingdon (GB) (ARAB)",
+    "lat": 52.33,
+    "lng": -0.1867
+  },
+  {
+    "name": "Keeneland (USA)",
+    "lat": 38.0174,
+    "lng": -84.605
+  },
+  {
+    "name": "Kelso",
+    "lat": 55.6,
+    "lng": -2.4333
+  },
+  {
+    "name": "Kempton",
+    "lat": 51.4183,
+    "lng": -0.4094
+  },
+  {
+    "name": "Kempton (AW)",
+    "lat": 51.4183,
+    "lng": -0.4094
+  },
+  {
+    "name": "Kempton (AW) (gb) (ARAB)",
+    "lat": 51.4183,
+    "lng": -0.4094
+  },
+  {
+    "name": "Killarney (IRE)",
+    "lat": 52.0333,
+    "lng": -9.5
+  },
+  {
+    "name": "Klampenborg (DEN)",
+    "lat": 55.8167,
+    "lng": 12.5667
+  },
+  {
+    "name": "Kyoto (JPN)",
+    "lat": 35.0116,
+    "lng": 135.7681
+  },
+  {
+    "name": "Leicester",
+    "lat": 52.6211,
+    "lng": -1.2067
+  },
+  {
+    "name": "Leopardstown (IRE)",
+    "lat": 53.2833,
+    "lng": -6.2167
+  },
+  {
+    "name": "Listowel (IRE)",
+    "lat": 52.45,
+    "lng": -9.4833
+  },
+  {
+    "name": "Longchamp (FR)",
+    "lat": 48.8447,
+    "lng": 2.2349
+  },
+  {
+    "name": "Ludlow",
+    "lat": 52.3681,
+    "lng": -2.7139
+  },
+  {
+    "name": "Maisons-Laffitte (FR)",
+    "lat": 48.9492,
+    "lng": 2.1397
+  },
+  {
+    "name": "Market Rasen",
+    "lat": 53.3872,
+    "lng": -0.3375
+  },
+  {
+    "name": "Market Rasen (gb) (ARAB)",
+    "lat": 53.3872,
+    "lng": -0.3375
+  },
+  {
+    "name": "Matamata (NZ)",
+    "lat": -37.8147,
+    "lng": 175.7639
+  },
+  {
+    "name": "Moonee Valley (AUS)",
+    "lat": -37.7903,
+    "lng": 144.9364
+  },
+  {
+    "name": "Mulheim (GER)",
+    "lat": 51.4397,
+    "lng": 7.0053
+  },
+  {
+    "name": "Munich (GER)",
+    "lat": 48.1351,
+    "lng": 11.582
+  },
+  {
+    "name": "Musselburgh",
+    "lat": 55.9428,
+    "lng": -3.05
+  },
+  {
+    "name": "Naas (IRE)",
+    "lat": 53.4333,
+    "lng": -6.6667
+  },
+  {
+    "name": "Newbury",
+    "lat": 51.3925,
+    "lng": -1.3217
+  },
+  {
+    "name": "Newbury (GB) (ARAB)",
+    "lat": 51.3925,
+    "lng": -1.3217
+  },
+  {
+    "name": "Newcastle",
+    "lat": 54.9606,
+    "lng": -1.6204
+  },
+  {
+    "name": "Newcastle (AUS)",
+    "lat": -32.919,
+    "lng": 151.7781
+  },
+  {
+    "name": "Newcastle (AW)",
+    "lat": 54.9606,
+    "lng": -1.6204
+  },
+  {
+    "name": "Newmarket",
+    "lat": 52.2446,
+    "lng": 0.4074
+  },
+  {
+    "name": "Newmarket (GB) (ARAB)",
+    "lat": 52.2446,
+    "lng": 0.4074
+  },
+  {
+    "name": "Newmarket (SAF)",
+    "lat": 52.2446,
+    "lng": 0.4074
+  },
+  {
+    "name": "Newton Abbot",
+    "lat": 50.5292,
+    "lng": -3.5931
+  },
+  {
+    "name": "Nottingham",
+    "lat": 52.95,
+    "lng": -1.1333
+  },
+  {
+    "name": "Nottingham (GB) (ARAB)",
+    "lat": 52.95,
+    "lng": -1.1333
+  },
+  {
+    "name": "Oaklawn Park (USA)",
+    "lat": 34.7415,
+    "lng": -93.6488
+  },
+  {
+    "name": "Ovrevoll (NOR)",
+    "lat": 59.9425,
+    "lng": 10.7069
+  },
+  {
+    "name": "Perth",
+    "lat": 56.3967,
+    "lng": -3.4333
+  },
+  {
+    "name": "Pimlico (USA)",
+    "lat": 39.3291,
+    "lng": -76.6183
+  },
+  {
+    "name": "Plumpton",
+    "lat": 50.9042,
+    "lng": 0.1833
+  },
+  {
+    "name": "Pontefract",
+    "lat": 53.6917,
+    "lng": -1.3167
+  },
+  {
+    "name": "Punchestown (IRE)",
+    "lat": 53.2667,
+    "lng": -6.5667
+  },
+  {
+    "name": "Randwick (AUS)",
+    "lat": -33.9959,
+    "lng": 151.1761
+  },
+  {
+    "name": "Redcar",
+    "lat": 54.5833,
+    "lng": -1.0667
+  },
+  {
+    "name": "Ripon",
+    "lat": 54.1333,
+    "lng": -1.5167
+  },
+  {
+    "name": "Roscommon (IRE)",
+    "lat": 53.6333,
+    "lng": -8.1833
+  },
+  {
+    "name": "Rosehill (AUS)",
+    "lat": -33.8467,
+    "lng": 151.0167
+  },
+  {
+    "name": "Santa Anita (USA)",
+    "lat": 34.0464,
+    "lng": -118.1006
+  },
+  {
+    "name": "Sedgefield",
+    "lat": 54.65,
+    "lng": -1.45
+  },
+  {
+    "name": "Sha Tin (HK)",
+    "lat": 22.3038,
+    "lng": 114.2129
+  },
+  {
+    "name": "Sligo (IRE)",
+    "lat": 54.2667,
+    "lng": -8.4833
+  },
+  {
+    "name": "Southwell",
+    "lat": 53.0833,
+    "lng": -0.95
+  },
+  {
+    "name": "Southwell (AW)",
+    "lat": 53.0833,
+    "lng": -0.95
+  },
+  {
+    "name": "Southwell (AW) (gb) (ARAB)",
+    "lat": 53.0833,
+    "lng": -0.95
+  },
+  {
+    "name": "Sunshine Coast (AUS)",
+    "lat": -26.6987,
+    "lng": 153.0976
+  },
+  {
+    "name": "Taby (SWE)",
+    "lat": 59.25,
+    "lng": 18.3667
+  },
+  {
+    "name": "Taunton",
+    "lat": 51.0142,
+    "lng": -3.1028
+  },
+  {
+    "name": "Taunton (GB) (ARAB)",
+    "lat": 51.0142,
+    "lng": -3.1028
+  },
+  {
+    "name": "Tauranga (NZ)",
+    "lat": -37.7867,
+    "lng": 176.1278
+  },
+  {
+    "name": "Thirsk",
+    "lat": 54.2333,
+    "lng": -1.3667
+  },
+  {
+    "name": "Thurles (IRE)",
+    "lat": 52.6667,
+    "lng": -7.6
+  },
+  {
+    "name": "Tokyo (JPN)",
+    "lat": 35.6762,
+    "lng": 139.7674
+  },
+  {
+    "name": "Toulouse (FR)",
+    "lat": 43.5853,
+    "lng": 1.4619
+  },
+  {
+    "name": "Towcester",
+    "lat": 52.1333,
+    "lng": -0.9833
+  },
+  {
+    "name": "Tramore (IRE)",
+    "lat": 52.1667,
+    "lng": -7.8167
+  },
+  {
+    "name": "Turffontein (SAF)",
+    "lat": -26.2408,
+    "lng": 28.0312
+  },
+  {
+    "name": "Uttoxeter",
+    "lat": 52.9,
+    "lng": -1.8667
+  },
+  {
+    "name": "Uttoxeter (GB) (ARAB)",
+    "lat": 52.9,
+    "lng": -1.8667
+  },
+  {
+    "name": "Warwick",
+    "lat": 52.2833,
+    "lng": -1.5833
+  },
+  {
+    "name": "Warwick (gb) (ARAB)",
+    "lat": 52.2833,
+    "lng": -1.5833
+  },
+  {
+    "name": "Wetherby",
+    "lat": 53.9333,
+    "lng": -1.3833
+  },
+  {
+    "name": "Wincanton",
+    "lat": 51.0542,
+    "lng": -2.4097
+  },
+  {
+    "name": "Windsor",
+    "lat": 51.4826,
+    "lng": -0.6089
+  },
+  {
+    "name": "Windsor (GB) (ARAB)",
+    "lat": 51.4826,
+    "lng": -0.6089
+  },
+  {
+    "name": "Wolverhampton",
+    "lat": 52.5833,
+    "lng": -2.1167
+  },
+  {
+    "name": "Wolverhampton (AW)",
+    "lat": 52.5833,
+    "lng": -2.1167
+  },
+  {
+    "name": "Wolverhampton (AW) (GB) (ARAB)",
+    "lat": 52.5833,
+    "lng": -2.1167
+  },
+  {
+    "name": "Woodbine (CAN)",
+    "lat": 43.7315,
+    "lng": -79.2605
+  },
+  {
+    "name": "Worcester",
+    "lat": 52.2,
+    "lng": -2.2167
+  },
+  {
+    "name": "Yarmouth",
+    "lat": 52.6167,
+    "lng": 1.7167
+  },
+  {
+    "name": "York",
+    "lat": 53.9626,
+    "lng": -1.0819
+  },
+  {
+    "name": "Albuquerque (USA)",
+    "lat": 35.0806447,
+    "lng": -106.5702026
+  },
+  {
+    "name": "Albury (AUS)",
+    "lat": -36.0532445,
+    "lng": 146.9597386
+  },
+  {
+    "name": "Alice springs (AUS)",
+    "lat": -23.756066,
+    "lng": 133.87211
+  },
+  {
+    "name": "Amiens (FR)",
+    "lat": 49.8941708,
+    "lng": 2.2956951
+  },
+  {
+    "name": "Angers (FR)",
+    "lat": 47.4739884,
+    "lng": -0.5515588
+  },
+  {
+    "name": "Angouleme (FR)",
+    "lat": 45.6484505,
+    "lng": 0.1561947
+  },
+  {
+    "name": "Ankara (TUR)",
+    "lat": 39.9207759,
+    "lng": 32.8540497
+  },
+  {
+    "name": "Arapahoe Park (USA)",
+    "lat": 39.6291451,
+    "lng": -104.6850987
+  },
+  {
+    "name": "Argentan (FR)",
+    "lat": 48.74289,
+    "lng": -0.0223386
+  },
+  {
+    "name": "Arlington (SAF)",
+    "lat": 42.0941096,
+    "lng": -88.0169555
+  },
+  {
+    "name": "Armidale (AUS)",
+    "lat": -30.5174538,
+    "lng": 151.6767113
+  },
+  {
+    "name": "Ashburton (NZ)",
+    "lat": -43.8857542,
+    "lng": 171.7655676
+  },
+  {
+    "name": "Assiniboia downs (CAN)",
+    "lat": 49.8819166,
+    "lng": -97.3346619
+  },
+  {
+    "name": "Avenches (SWI)",
+    "lat": 46.879575,
+    "lng": 7.040941
+  },
+  {
+    "name": "Avondale (NZ)",
+    "lat": -36.8974909,
+    "lng": 174.6911189
+  },
+  {
+    "name": "Bad Doberan (GER)",
+    "lat": 54.105858,
+    "lng": 11.9026057
+  },
+  {
+    "name": "Balaklava (AUS)",
+    "lat": -34.1523097,
+    "lng": 138.4080132
+  },
+  {
+    "name": "Bay Meadows (USA)",
+    "lat": 53.4223806,
+    "lng": -6.3733459
+  },
+  {
+    "name": "Belterra Park (USA)",
+    "lat": 29.6876283,
+    "lng": -98.4455359
+  },
+  {
+    "name": "Beulah park (USA)",
+    "lat": -34.9176726,
+    "lng": 138.6452299
+  },
+  {
+    "name": "Bloemfontein (SAF)",
+    "lat": -29.116395,
+    "lng": 26.215496
+  },
+  {
+    "name": "Bordeaux Le Bouscat (FR)",
+    "lat": 44.8661755,
+    "lng": -0.5992399
+  },
+  {
+    "name": "Borrowdale (SAF)",
+    "lat": 54.5163359,
+    "lng": -3.1470106
+  },
+  {
+    "name": "Bremen (GER)",
+    "lat": 53.0758196,
+    "lng": 8.8071646
+  },
+  {
+    "name": "Cagnes-Sur-Mer (FR)",
+    "lat": 43.6612012,
+    "lng": 7.1513834
+  },
+  {
+    "name": "Canberra (AUS)",
+    "lat": -35.2286324,
+    "lng": 149.14428
+  },
+  {
+    "name": "Cavaillon (FR)",
+    "lat": 43.8356808,
+    "lng": 5.0383522
+  },
+  {
+    "name": "Charles town (USA)",
+    "lat": 39.2981737,
+    "lng": -77.850562
+  },
+  {
+    "name": "Chateaubriant (FR)",
+    "lat": 47.7194057,
+    "lng": -1.3757282
+  },
+  {
+    "name": "Cholet (FR)",
+    "lat": 47.0617293,
+    "lng": -0.8801359
+  },
+  {
+    "name": "Clairwood (SAF)",
+    "lat": -29.9127778,
+    "lng": 30.9847222
+  },
+  {
+    "name": "Club Hipico de Santiago (CHI)",
+    "lat": -33.4639182,
+    "lng": -70.6685993
+  },
+  {
+    "name": "Colonial Downs (USA)",
+    "lat": 36.8487495,
+    "lng": -77.898991
+  },
+  {
+    "name": "Copenhagen (DEN)",
+    "lat": 55.6867243,
+    "lng": 12.5700724
+  },
+  {
+    "name": "Craon (FR)",
+    "lat": 47.84831,
+    "lng": -0.9518383
+  },
+  {
+    "name": "Dax (FR)",
+    "lat": 43.7084065,
+    "lng": -1.0518771
+  },
+  {
+    "name": "Delaware Park (USA)",
+    "lat": 38.464388,
+    "lng": -75.5942826
+  },
+  {
+    "name": "Delta downs (USA)",
+    "lat": 30.1948953,
+    "lng": -93.6233615
+  },
+  {
+    "name": "Dielsdorf (SWI)",
+    "lat": 47.4810371,
+    "lng": 8.4543245
+  },
+  {
+    "name": "Dresden (GER)",
+    "lat": 51.0493286,
+    "lng": 13.7381437
+  },
+  {
+    "name": "Durtal (FR)",
+    "lat": 47.6705186,
+    "lng": -0.2453787
+  },
+  {
+    "name": "Echuca (AUS)",
+    "lat": -36.1589228,
+    "lng": 144.7895725
+  },
+  {
+    "name": "Ellis Park (USA)",
+    "lat": 37.9168708,
+    "lng": -87.5429779
+  },
+  {
+    "name": "Emerald Downs (USA)",
+    "lat": 47.3281772,
+    "lng": -122.2376223
+  },
+  {
+    "name": "Evangeline Downs (USA)",
+    "lat": 30.5261916,
+    "lng": -92.0601408
+  },
+  {
+    "name": "Evreux (FR)",
+    "lat": 49.0268903,
+    "lng": 1.1510164
+  },
+  {
+    "name": "Fairplex Park (USA)",
+    "lat": 34.0887209,
+    "lng": -117.7630787
+  },
+  {
+    "name": "Far Hills (USA)",
+    "lat": 40.684268,
+    "lng": -74.6357148
+  },
+  {
+    "name": "Finger Lakes (USA)",
+    "lat": 42.9696646,
+    "lng": -77.3414391
+  },
+  {
+    "name": "Flamingo Park (SAF)",
+    "lat": -27.9481926,
+    "lng": 26.7287318
+  },
+  {
+    "name": "Florence (ITY)",
+    "lat": 43.7697955,
+    "lng": 11.2556404
+  },
+  {
+    "name": "Folkestone",
+    "lat": 51.5542515,
+    "lng": -0.3632384
+  },
+  {
+    "name": "Fonner Park (USA)",
+    "lat": 40.9052592,
+    "lng": -98.3289371
+  },
+  {
+    "name": "Frauenfeld (SWI)",
+    "lat": 47.5561915,
+    "lng": 8.8963347
+  },
+  {
+    "name": "Fresno (USA)",
+    "lat": 36.7394421,
+    "lng": -119.78483
+  },
+  {
+    "name": "Fukushima (JPN)",
+    "lat": 37.7642436,
+    "lng": 140.4779318
+  },
+  {
+    "name": "Funabashi (JPN)",
+    "lat": 35.6848963,
+    "lng": 139.9970661
+  },
+  {
+    "name": "Gatton (AUS)",
+    "lat": -27.5525458,
+    "lng": 152.2640841
+  },
+  {
+    "name": "Gelsenkirchen (GER)",
+    "lat": 51.5110321,
+    "lng": 7.0960124
+  },
+  {
+    "name": "Gosford (AUS)",
+    "lat": -33.4245828,
+    "lng": 151.3275269
+  },
+  {
+    "name": "Gosforth (SAF)",
+    "lat": 55.035055,
+    "lng": -1.6236897
+  },
+  {
+    "name": "Goulburn (AUS)",
+    "lat": -34.7149242,
+    "lng": 149.7500309
+  },
+  {
+    "name": "Great Meadow (USA)",
+    "lat": 54.0867425,
+    "lng": -4.6528485
+  },
+  {
+    "name": "Gulfstream Park West (USA)",
+    "lat": -34.1201979,
+    "lng": 18.8764514
+  },
+  {
+    "name": "Gundagai (AUS)",
+    "lat": -35.0692423,
+    "lng": 148.1220831
+  },
+  {
+    "name": "Hakodate (JPN)",
+    "lat": 41.7812014,
+    "lng": 140.7747998
+  },
+  {
+    "name": "Hamilton",
+    "lat": 40.6417264,
+    "lng": -74.0900718
+  },
+  {
+    "name": "Hanover (GER)",
+    "lat": 52.3744779,
+    "lng": 9.7385532
+  },
+  {
+    "name": "Hastings Racecourse (CAN)",
+    "lat": 49.2866514,
+    "lng": -123.0383488
+  },
+  {
+    "name": "Hawera (NZ)",
+    "lat": -39.5650308,
+    "lng": 174.2770985
+  },
+  {
+    "name": "Hawkesbury (AUS)",
+    "lat": -33.6192091,
+    "lng": 150.781144
+  },
+  {
+    "name": "Hawthorne (USA)",
+    "lat": 41.8285843,
+    "lng": -87.7510767
+  },
+  {
+    "name": "Hipodromo Chile (CHI)",
+    "lat": -33.4041507,
+    "lng": -70.6665003
+  },
+  {
+    "name": "Hollywood Park (USA)",
+    "lat": 29.6005047,
+    "lng": -98.48724
+  },
+  {
+    "name": "Hoosier park (USA)",
+    "lat": 29.5839511,
+    "lng": -98.3305985
+  },
+  {
+    "name": "Hoppegarten (GER)",
+    "lat": 52.550231,
+    "lng": 13.6411944
+  },
+  {
+    "name": "Hyeres (FR)",
+    "lat": 43.1202573,
+    "lng": 6.1301614
+  },
+  {
+    "name": "Indiana Grand (USA)",
+    "lat": 41.8217983,
+    "lng": -87.621299
+  },
+  {
+    "name": "Ipswich (AUS)",
+    "lat": -27.615122,
+    "lng": 152.8047866
+  },
+  {
+    "name": "Jagersro (SWE)",
+    "lat": 55.5730958,
+    "lng": 13.0714978
+  },
+  {
+    "name": "Jebel Ali (UAE)",
+    "lat": 25.0834872,
+    "lng": 55.18983
+  },
+  {
+    "name": "Kanazawa (JPN)",
+    "lat": 36.561627,
+    "lng": 136.6568822
+  },
+  {
+    "name": "Kawasaki (JPN)",
+    "lat": 35.5324982,
+    "lng": 139.7108026
+  },
+  {
+    "name": "Kembla Grange (AUS)",
+    "lat": -34.4701561,
+    "lng": 150.8175256
+  },
+  {
+    "name": "Kenilworth (SAF)",
+    "lat": -33.99553,
+    "lng": 18.4850198
+  },
+  {
+    "name": "Kensington (AUS)",
+    "lat": -37.7879701,
+    "lng": 144.9272296
+  },
+  {
+    "name": "Kentucky Downs (USA)",
+    "lat": 32.4939157,
+    "lng": -83.6700606
+  },
+  {
+    "name": "Kilbeggan (IRE)",
+    "lat": 53.3681414,
+    "lng": -7.4979792
+  },
+  {
+    "name": "Kochi (JPN)",
+    "lat": 33.504346,
+    "lng": 133.5317744
+  },
+  {
+    "name": "Kokura (JPN)",
+    "lat": 33.8429592,
+    "lng": 130.8729927
+  },
+  {
+    "name": "Kranji (SIN)",
+    "lat": 1.4252189,
+    "lng": 103.7619891
+  },
+  {
+    "name": "Krefeld (GER)",
+    "lat": 51.3331205,
+    "lng": 6.5623343
+  },
+  {
+    "name": "Kyneton (AUS)",
+    "lat": -37.2405186,
+    "lng": 144.4417696
+  },
+  {
+    "name": "La Teste De Buch (FR)",
+    "lat": 44.6316943,
+    "lng": -1.1491319
+  },
+  {
+    "name": "La Zarzuela (SPA)",
+    "lat": 38.0985338,
+    "lng": -3.6432974
+  },
+  {
+    "name": "Launceston (AUS)",
+    "lat": -41.4280368,
+    "lng": 147.1486853
+  },
+  {
+    "name": "Laurel Park (USA)",
+    "lat": 35.3137282,
+    "lng": -82.4934535
+  },
+  {
+    "name": "Laytown (IRE)",
+    "lat": 53.6795281,
+    "lng": -6.242754
+  },
+  {
+    "name": "Le Croise-Laroche (FR)",
+    "lat": 50.6844532,
+    "lng": 3.1896545
+  },
+  {
+    "name": "Le Lion-D'Angers (FR)",
+    "lat": 47.6289589,
+    "lng": -0.7370899
+  },
+  {
+    "name": "Le Mans (FR)",
+    "lat": 48.0073849,
+    "lng": 0.1967849
+  },
+  {
+    "name": "Le Touquet (FR)",
+    "lat": 50.5200083,
+    "lng": 1.5864532
+  },
+  {
+    "name": "Les Sables-d'Olonne (FR)",
+    "lat": 46.4990505,
+    "lng": -1.7767859
+  },
+  {
+    "name": "Limerick (IRE)",
+    "lat": 52.5908266,
+    "lng": -8.6909649
+  },
+  {
+    "name": "Lingfield",
+    "lat": 51.1705697,
+    "lng": -0.0029084
+  },
+  {
+    "name": "Lingfield (GB) (ARAB)",
+    "lat": 51.1707495,
+    "lng": -0.003502
+  },
+  {
+    "name": "Livorno (ITY)",
+    "lat": 42.7902379,
+    "lng": 10.3402239
+  },
+  {
+    "name": "Lone Star Park (USA)",
+    "lat": 32.7747138,
+    "lng": -96.9881796
+  },
+  {
+    "name": "Longchamp (FR) (ARAB)",
+    "lat": 47.260804,
+    "lng": 5.2864826
+  },
+  {
+    "name": "Los Alamitos (USA)",
+    "lat": 33.8038865,
+    "lng": -118.0772433
+  },
+  {
+    "name": "Louisiana Downs (USA)",
+    "lat": 30.1948953,
+    "lng": -93.6233615
+  },
+  {
+    "name": "Lucerne (SWI)",
+    "lat": 47.052144,
+    "lng": 8.3058123
+  },
+  {
+    "name": "Lyon Parilly (FR)",
+    "lat": 45.7195177,
+    "lng": 4.8875525
+  },
+  {
+    "name": "Lyon-La Soie (FR)",
+    "lat": 45.7625551,
+    "lng": 4.9240959
+  },
+  {
+    "name": "Magdeburg (GER)",
+    "lat": 52.1314783,
+    "lng": 11.6400789
+  },
+  {
+    "name": "Mahoning Valley (USA)",
+    "lat": 40.8325382,
+    "lng": -75.676704
+  },
+  {
+    "name": "Mallow (IRE)",
+    "lat": 52.2714327,
+    "lng": -8.7312642
+  },
+  {
+    "name": "Mannheim (GER)",
+    "lat": 49.4503139,
+    "lng": 8.5569436
+  },
+  {
+    "name": "Marseille Borely (FR)",
+    "lat": 43.2577001,
+    "lng": 5.3788072
+  },
+  {
+    "name": "Marseille Pont-de-Vivaux (FR)",
+    "lat": 43.2794454,
+    "lng": 5.4179119
+  },
+  {
+    "name": "Meadowlands (USA)",
+    "lat": -21.1591351,
+    "lng": 149.1464027
+  },
+  {
+    "name": "Merano (ITY)",
+    "lat": 46.6713536,
+    "lng": 11.1646348
+  },
+  {
+    "name": "Meslay-Du-Maine (FR)",
+    "lat": 47.9500183,
+    "lng": -0.5537919
+  },
+  {
+    "name": "Meydan (UAE)",
+    "lat": 25.1576345,
+    "lng": 55.3031944
+  },
+  {
+    "name": "Meydan (uae) (ARAB)",
+    "lat": 25.1576345,
+    "lng": 55.3031944
+  },
+  {
+    "name": "Moe (AUS)",
+    "lat": -38.1778654,
+    "lng": 146.2555437
+  },
+  {
+    "name": "Mombetsu (JPN)",
+    "lat": 44.3565151,
+    "lng": 143.3545224
+  },
+  {
+    "name": "Monmouth Park (USA)",
+    "lat": 40.3090591,
+    "lng": -74.0209449
+  },
+  {
+    "name": "Mont-De-Marsan (FR)",
+    "lat": 43.8911318,
+    "lng": -0.500972
+  },
+  {
+    "name": "Morioka (JPN)",
+    "lat": 39.7021331,
+    "lng": 141.1545397
+  },
+  {
+    "name": "Mornington (AUS)",
+    "lat": -38.2355379,
+    "lng": 145.0708125
+  },
+  {
+    "name": "Morphettville (AUS)",
+    "lat": -34.9763419,
+    "lng": 138.5423417
+  },
+  {
+    "name": "Moulins (FR)",
+    "lat": 46.5660526,
+    "lng": 3.3331703
+  },
+  {
+    "name": "Mountaineer Park (USA)",
+    "lat": 40.581617,
+    "lng": -80.6540622
+  },
+  {
+    "name": "NAGOYA (JPN)",
+    "lat": 35.1851045,
+    "lng": 136.8998438
+  },
+  {
+    "name": "Nad Al Sheba (UAE)",
+    "lat": 25.1576345,
+    "lng": 55.3031944
+  },
+  {
+    "name": "Nakayama (JPN)",
+    "lat": 38.3331256,
+    "lng": 140.2831151
+  },
+  {
+    "name": "Nancy (FR)",
+    "lat": 48.6937223,
+    "lng": 6.1834097
+  },
+  {
+    "name": "Nantes (FR)",
+    "lat": 47.2186371,
+    "lng": -1.5541362
+  },
+  {
+    "name": "Naples (ITY)",
+    "lat": 40.8358846,
+    "lng": 14.2487679
+  },
+  {
+    "name": "Navan (IRE)",
+    "lat": 53.6843882,
+    "lng": -6.6748884
+  },
+  {
+    "name": "Neuss (GER)",
+    "lat": 51.1981778,
+    "lng": 6.6916476
+  },
+  {
+    "name": "Newmarket (July)",
+    "lat": 52.2303892,
+    "lng": 0.3599388
+  },
+  {
+    "name": "Niigata (JPN)",
+    "lat": 37.9483599,
+    "lng": 139.1883607
+  },
+  {
+    "name": "Nimes (FR)",
+    "lat": 43.8374249,
+    "lng": 4.3600687
+  },
+  {
+    "name": "Northam (AUS)",
+    "lat": -31.6357044,
+    "lng": 116.7019783
+  },
+  {
+    "name": "Northlands park (CAN)",
+    "lat": 53.5663651,
+    "lng": -113.4583159
+  },
+  {
+    "name": "Ohi (JPN)",
+    "lat": 35.5923051,
+    "lng": 139.743401
+  },
+  {
+    "name": "Ostend (BEL)",
+    "lat": 51.2080593,
+    "lng": 2.9040863
+  },
+  {
+    "name": "Otaki (NZ)",
+    "lat": -40.7664211,
+    "lng": 175.1675484
+  },
+  {
+    "name": "Pakenham (AUS)",
+    "lat": -38.0938204,
+    "lng": 145.6110334
+  },
+  {
+    "name": "Pardubice (CZE)",
+    "lat": 50.088388,
+    "lng": 15.8066413
+  },
+  {
+    "name": "Parx (USA)",
+    "lat": 8.4876382,
+    "lng": 76.9258875
+  },
+  {
+    "name": "Pau (FR)",
+    "lat": 43.2957547,
+    "lng": -0.3685668
+  },
+  {
+    "name": "Penn National (USA)",
+    "lat": 39.854442,
+    "lng": -77.5400637
+  },
+  {
+    "name": "Phoenix Park (IRE)",
+    "lat": 51.9815311,
+    "lng": -0.2166208
+  },
+  {
+    "name": "Pisa (ITY)",
+    "lat": 43.4714722,
+    "lng": 10.6797912
+  },
+  {
+    "name": "Pleasanton (USA)",
+    "lat": 37.6627254,
+    "lng": -121.8854407
+  },
+  {
+    "name": "Pornichet-La Baule (FR)",
+    "lat": 47.2954672,
+    "lng": -2.3459907
+  },
+  {
+    "name": "Prairie Meadows (USA)",
+    "lat": 41.6511364,
+    "lng": -93.4945655
+  },
+  {
+    "name": "Presque Isle Downs (USA)",
+    "lat": 42.0685584,
+    "lng": -80.0308392
+  },
+  {
+    "name": "Pukekohe Park (NZ)",
+    "lat": -37.2157452,
+    "lng": 174.9182093
+  },
+  {
+    "name": "RANDJESFONTEIN (SAF)",
+    "lat": -25.9278451,
+    "lng": 28.1644817
+  },
+  {
+    "name": "Remington Park (USA)",
+    "lat": 42.2871655,
+    "lng": -83.0061399
+  },
+  {
+    "name": "Retama Park (USA)",
+    "lat": 29.5865235,
+    "lng": -98.3181536
+  },
+  {
+    "name": "Riccarton Park (NZ)",
+    "lat": -43.5275101,
+    "lng": 172.5461112
+  },
+  {
+    "name": "Riyadh (KSA)",
+    "lat": 23.333333,
+    "lng": 45.333333
+  },
+  {
+    "name": "Riyadh (ksa) (ARAB)",
+    "lat": 23.333333,
+    "lng": 45.333333
+  },
+  {
+    "name": "Ruakaka (NZ)",
+    "lat": -35.8754355,
+    "lng": 174.4557066
+  },
+  {
+    "name": "Ruidoso Downs (USA)",
+    "lat": 33.3292691,
+    "lng": -105.60442
+  },
+  {
+    "name": "Saga (JPN)",
+    "lat": 33.1833111,
+    "lng": 130.0236498
+  },
+  {
+    "name": "Saint-Brieuc (FR)",
+    "lat": 48.5141134,
+    "lng": -2.7603283
+  },
+  {
+    "name": "Saint-Cloud (FR)",
+    "lat": 48.8437412,
+    "lng": 2.219344
+  },
+  {
+    "name": "Saint-Malo (FR)",
+    "lat": 48.649518,
+    "lng": -2.0260409
+  },
+  {
+    "name": "Sale (AUS)",
+    "lat": 44.980656,
+    "lng": 8.809348
+  },
+  {
+    "name": "Salisbury",
+    "lat": 51.0540002,
+    "lng": -1.8566179
+  },
+  {
+    "name": "Salisbury (GB) (ARAB)",
+    "lat": 51.0540002,
+    "lng": -1.8566179
+  },
+  {
+    "name": "Salon-de-Provence (FR)",
+    "lat": 43.6405237,
+    "lng": 5.0980225
+  },
+  {
+    "name": "Sam Houston (USA)",
+    "lat": 30.325209,
+    "lng": -94.8085373
+  },
+  {
+    "name": "San Sebastian (SPA)",
+    "lat": 43.2621602,
+    "lng": -2.0220636
+  },
+  {
+    "name": "San Siro (ITY)",
+    "lat": 45.4782003,
+    "lng": 9.123964
+  },
+  {
+    "name": "Sandown",
+    "lat": 51.3767195,
+    "lng": -0.3568281
+  },
+  {
+    "name": "Sandown (AUS)",
+    "lat": 51.3767195,
+    "lng": -0.3568281
+  },
+  {
+    "name": "Sandown (GB) (ARAB)",
+    "lat": 51.3767195,
+    "lng": -0.3568281
+  },
+  {
+    "name": "Santa anita (usa) (ARAB)",
+    "lat": 42.0937763,
+    "lng": -111.9567817
+  },
+  {
+    "name": "Sapporo (JPN)",
+    "lat": 43.077501,
+    "lng": 141.3258793
+  },
+  {
+    "name": "Saratoga (USA)",
+    "lat": 43.0833231,
+    "lng": -73.8712155
+  },
+  {
+    "name": "Scone (AUS)",
+    "lat": 56.4204776,
+    "lng": -3.39916
+  },
+  {
+    "name": "Scottsville (SAF)",
+    "lat": -29.6092915,
+    "lng": 30.3996897
+  },
+  {
+    "name": "Seoul (KOR)",
+    "lat": 37.5826542,
+    "lng": 127.0288652
+  },
+  {
+    "name": "Seymour (AUS)",
+    "lat": -37.035057,
+    "lng": 145.1693437
+  },
+  {
+    "name": "Siracusa (ITY)",
+    "lat": 37.0646139,
+    "lng": 15.2907196
+  },
+  {
+    "name": "Sonoda (JPN)",
+    "lat": 34.7662036,
+    "lng": 135.4454296
+  },
+  {
+    "name": "St Moritz (SWI)",
+    "lat": 46.4978958,
+    "lng": 9.8392428
+  },
+  {
+    "name": "Stampede park (CAN)",
+    "lat": 43.5890566,
+    "lng": -116.5441462
+  },
+  {
+    "name": "Strasbourg (FR)",
+    "lat": 48.584614,
+    "lng": 7.7507127
+  },
+  {
+    "name": "Stratford",
+    "lat": 52.1806439,
+    "lng": -1.7194238
+  },
+  {
+    "name": "Stratford (gb) (ARAB)",
+    "lat": 52.1806439,
+    "lng": -1.7194238
+  },
+  {
+    "name": "Stromsholm (SWE)",
+    "lat": 59.5237411,
+    "lng": 16.248736
+  },
+  {
+    "name": "Suffolk Downs (USA)",
+    "lat": 42.39051,
+    "lng": -70.9971875
+  },
+  {
+    "name": "SunRay Park (USA)",
+    "lat": 45.2541656,
+    "lng": -75.9071982
+  },
+  {
+    "name": "Sunland Park (USA)",
+    "lat": 31.8066008,
+    "lng": -106.5574105
+  },
+  {
+    "name": "Taipa (MAC)",
+    "lat": 39.4827608,
+    "lng": -8.016133
+  },
+  {
+    "name": "Tarbes (FR)",
+    "lat": 43.232858,
+    "lng": 0.0781021
+  },
+  {
+    "name": "Te Rapa (NZ)",
+    "lat": -37.7656281,
+    "lng": 175.2453267
+  },
+  {
+    "name": "Te aroha (NZ)",
+    "lat": -37.5606938,
+    "lng": 175.7004692
+  },
+  {
+    "name": "Thistledown (USA)",
+    "lat": 37.9936051,
+    "lng": -107.6997825
+  },
+  {
+    "name": "Timonium (USA)",
+    "lat": 39.4442583,
+    "lng": -76.6311797
+  },
+  {
+    "name": "Tipperary (IRE)",
+    "lat": 52.5020681,
+    "lng": -8.2067707
+  },
+  {
+    "name": "Tralee (IRE)",
+    "lat": 52.2796712,
+    "lng": -9.6821726
+  },
+  {
+    "name": "Trentham (NZ)",
+    "lat": -41.1398978,
+    "lng": 175.0423249
+  },
+  {
+    "name": "Turf Paradise (USA)",
+    "lat": 33.635094,
+    "lng": -112.0933865
+  },
+  {
+    "name": "Turffontein new (SAF)",
+    "lat": -26.2504579,
+    "lng": 28.0518092
+  },
+  {
+    "name": "Turfway Park (USA)",
+    "lat": 39.0242396,
+    "lng": -84.6346035
+  },
+  {
+    "name": "Urawa (JPN)",
+    "lat": 35.8589883,
+    "lng": 139.6571882
+  },
+  {
+    "name": "Vaal (SAF)",
+    "lat": -26.9804245,
+    "lng": 27.2004463
+  },
+  {
+    "name": "Valparaiso Sporting Club (CHI)",
+    "lat": -33.0212768,
+    "lng": -71.5351742
+  },
+  {
+    "name": "Varese (ITY)",
+    "lat": 45.8397203,
+    "lng": 8.7541338
+  },
+  {
+    "name": "Veliefendi (TUR)",
+    "lat": 40.9959417,
+    "lng": 28.8978934
+  },
+  {
+    "name": "Vichy (FR)",
+    "lat": 46.124017,
+    "lng": 3.4203658
+  },
+  {
+    "name": "Vittel (FR)",
+    "lat": 48.2020717,
+    "lng": 5.9418851
+  },
+  {
+    "name": "Wagga Wagga (AUS)",
+    "lat": -35.115,
+    "lng": 147.3677778
+  },
+  {
+    "name": "Wangaratta (AUS)",
+    "lat": -36.3613278,
+    "lng": 146.2885782
+  },
+  {
+    "name": "Waregem (BEL)",
+    "lat": 50.9058985,
+    "lng": 3.4138883
+  },
+  {
+    "name": "Warwick Farm (AUS)",
+    "lat": -33.9099549,
+    "lng": 150.9447659
+  },
+  {
+    "name": "Wellington (AUS)",
+    "lat": -32.5559516,
+    "lng": 148.9311743
+  },
+  {
+    "name": "Werribee (AUS)",
+    "lat": -37.9072331,
+    "lng": 144.6411388
+  },
+  {
+    "name": "Wexford (IRE)",
+    "lat": 52.3391663,
+    "lng": -6.4921651
+  },
+  {
+    "name": "Wingatui (NZ)",
+    "lat": -45.8747648,
+    "lng": 170.3888097
+  },
+  {
+    "name": "Wyong (AUS)",
+    "lat": -33.2811414,
+    "lng": 151.4312144
+  },
+  {
+    "name": "Zia park (USA)",
+    "lat": 30.2110501,
+    "lng": 71.4575705
+  }
+]
