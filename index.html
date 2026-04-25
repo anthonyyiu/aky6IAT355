@@ -153,6 +153,7 @@
       display: inline-block;
       padding: 0.3rem 1.2rem;
       border-radius: 60px;
+      /* backdrop-filter removed due to validator warning - but kept as progressive enhancement */
       backdrop-filter: blur(4px);
       margin-bottom: 1.2rem;
     }
@@ -212,7 +213,26 @@
     }
     #horse:active { cursor: grabbing; }
 
-    h2 { color: #FF8FB1; margin-bottom: 12px; font-size: 1.65rem; font-weight: 700; }
+    /* Proper heading hierarchy: h1 for hero, h2 for sections, h3 for future if needed */
+    h1 { 
+      font-size: 5.2rem; 
+      font-weight: 800; 
+      letter-spacing: -0.02em;
+      text-shadow: 0 6px 14px rgba(0,0,0,0.2);
+      color: white;
+    }
+    h2 { 
+      color: #FF8FB1; 
+      margin-bottom: 12px; 
+      font-size: 1.65rem; 
+      font-weight: 700; 
+    }
+    h3 {
+      color: #FF8FB1;
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin: 0 0 0.5rem 0;
+    }
     #map {
       height: 500px;
       border-radius: 20px;
@@ -243,6 +263,18 @@
       width: 100%;
       max-width: 360px;
       font-family: inherit;
+    }
+    /* Add proper label for accessibility */
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
     }
     .flex-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; }
     .tab-group {
@@ -326,7 +358,7 @@
     .vega-embed details, 
     .vega-embed summary,
     .vega-embed .vega-actions {
-      display: none; /* Cleaner look, optional */
+      display: none;
     }
     canvas, svg {
       max-width: 100%;
@@ -385,13 +417,13 @@
 
 <header class="hero" id="mainHero">
   <div class="hero-sub">An introduction to the data of :</div>
-  <div class="hero-main">Horse Racing</div>
-  <button class="discover-btn" id="discoverBtn">DISCOVER</button>
+  <h1 class="hero-main">Horse Racing</h1>
+  <button class="discover-btn" id="discoverBtn" aria-label="Discover content below hero section">DISCOVER</button>
 </header>
 
 <div class="container">
   <div class="content">
-    <!-- INTRODUCTION section -->
+    <!-- INTRODUCTION section - proper heading hierarchy H2 -->
     <section id="section-welcome" class="card section">
       <h2>Introduction</h2>
       <div class="intro-text">
@@ -407,9 +439,9 @@
       <div class="flex-row" style="margin-bottom: 1rem;">
         <h2 style="margin-bottom: 0;">General Visualizations</h2>
         <div class="tab-group">
-          <button id="tabOverall" class="tab-btn active">Overall</button>
-          <button id="tabGB" class="tab-btn">Great Britain</button>
-          <button id="tabNonGB" class="tab-btn">Rest of World</button>
+          <button id="tabOverall" class="tab-btn active" aria-label="Show overall charts">Overall</button>
+          <button id="tabGB" class="tab-btn" aria-label="Show Great Britain charts">Great Britain</button>
+          <button id="tabNonGB" class="tab-btn" aria-label="Show Rest of World charts">Rest of World</button>
         </div>
       </div>
       <div class="note-box">
@@ -455,8 +487,14 @@
       <div class="note-box" style="margin-bottom: 1rem;">
         <strong>Note:</strong> Some racecourses will fail to display, try a different marker!
       </div>
-      <p><em>Click any marker on the map or use the dropdown to explore detailed data for a specific racecourse.</em></p>
-      <select id="courseDropdown" class="course-selector"><option value="">-- Select a racecourse --</option></select>
+      <p>Click any marker on the map or use the dropdown to explore detailed data for a specific racecourse.</p>
+      
+      <!-- Label for accessibility, visually hidden but present for screen readers -->
+      <label for="courseDropdown" class="visually-hidden">Select a racecourse</label>
+      <select id="courseDropdown" class="course-selector" aria-label="Select a racecourse to view specific data">
+        <option value="">-- Select a racecourse --</option>
+      </select>
+      
       <div id="map"></div>
       <div style="margin-top: 30px;">
         <div class="vis-card"><div class="vis-title" id="local-races-title">Races Per Year (Selected Course)</div><div class="vis-description">Yearly number of races held at the chosen course.</div><div id="observablehq-local_races_per_year-582"></div></div>
@@ -481,20 +519,20 @@
   </div>
 
   <div class="track">
-    <img src="track.png" class="track-img" alt="track">
-    <img src="horse.png" id="horse" alt="horse">
+    <img src="track.png" class="track-img" alt="Race track background">
+    <img src="horse.png" id="horse" alt="Horse icon indicating scroll progress">
   </div>
 </div>
 
 <footer>
-  IAT355 Visual Analytics - Horse Racing | aky6 | <a href="https://observablehq.com/d/b4374c2e7ce71428@582" target="_blank" style="color:white;">Made with Vegalite</a>
+  IAT355 Visual Analytics - Horse Racing | aky6 | <a href="https://observablehq.com/d/b4374c2e7ce71428@582" target="_blank" rel="noopener noreferrer" style="color:white;">Made with Vegalite</a>
 </footer>
 
-<div class="dot-nav">
-  <div class="nav-dot" data-section="section-welcome"><span class="tooltip">Introduction</span></div>
-  <div class="nav-dot" data-section="section-general"><span class="tooltip">General</span></div>
-  <div class="nav-dot" data-section="section-local"><span class="tooltip">Local</span></div>
-  <div class="nav-dot" data-section="section-lineage"><span class="tooltip">Lineage</span></div>
+<div class="dot-nav" aria-label="Section navigation">
+  <div class="nav-dot" data-section="section-welcome" aria-label="Navigate to Introduction"><span class="tooltip">Introduction</span></div>
+  <div class="nav-dot" data-section="section-general" aria-label="Navigate to General Visualizations"><span class="tooltip">General</span></div>
+  <div class="nav-dot" data-section="section-local" aria-label="Navigate to Local Visualizations"><span class="tooltip">Local</span></div>
+  <div class="nav-dot" data-section="section-lineage" aria-label="Navigate to Lineage Analysis"><span class="tooltip">Lineage</span></div>
 </div>
 
 <script>
