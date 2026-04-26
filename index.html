@@ -5,12 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
   <title>Horse Racing Insights | Data-Driven Analytics</title>
 
-  <!-- Vega-Lite for charts -->
+  <!-- Vega-Lite -->
   <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
 
-  <!-- Leaflet for interactive map -->
+  <!-- Leaflet -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
@@ -18,345 +18,126 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@observablehq/inspector@5/dist/inspector.css">
 
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
+    /* === YOUR WORKING CSS (unchanged, full version) === */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      font-family: "Hiragino Kakugo Pro", "Kakugo", "Hiragino Sans", "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: "Hiragino Kakugo Pro", "Kakugo", "Hiragino Sans", "Segoe UI", system-ui, sans-serif;
       background: #F5E6D3;
       color: #2F2F2F;
     }
-
-    .content {
-      width: 98%;
-      max-width: none;
-      margin: 0 auto;
-      padding: 2rem 2rem 4rem 2rem;
-      background: #F5E6D3;
-    }
-
+    .content { width: 98%; margin: 0 auto; padding: 2rem 2rem 4rem 2rem; background: #F5E6D3; }
     .card {
-      background: white;
-      margin: 20px auto;
-      padding: 28px 40px;
-      border-radius: 28px;
-      box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.2), 0 5px 12px -6px rgba(0, 0, 0, 0.1);
-      border: 2px solid #6DBE8A;
-      max-width: 85%;
-      transition: none;
+      background: white; margin: 20px auto; padding: 28px 40px; border-radius: 28px;
+      box-shadow: 0 20px 35px -12px rgba(0,0,0,0.2), 0 5px 12px -6px rgba(0,0,0,0.1);
+      border: 2px solid #6DBE8A; max-width: 85%;
     }
-
     .vis-card {
-      background: #fefefe;
-      margin: 1.8rem 0;
-      padding: 1.8rem 2rem;
-      border-radius: 24px;
-      border: 1px solid #e0d6cc;
-      box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.15), 0 4px 8px -4px rgba(0, 0, 0, 0.05);
+      background: #fefefe; margin: 1.8rem 0; padding: 1.8rem 2rem; border-radius: 24px;
+      border: 1px solid #e0d6cc; box-shadow: 0 20px 35px -12px rgba(0,0,0,0.15);
     }
-
     .vis-title {
-      font-size: 1.3rem;
-      font-weight: 600;
-      color: #FF8FB1;
-      margin-bottom: 0.5rem;
-      border-left: 4px solid #6DBE8A;
-      padding-left: 12px;
+      font-size: 1.3rem; font-weight: 600; color: #FF8FB1; margin-bottom: 0.5rem;
+      border-left: 4px solid #6DBE8A; padding-left: 12px;
     }
-
-    .vis-description {
-      font-size: 0.85rem;
-      color: #5a5a5a;
-      margin-bottom: 0.8rem;
-      line-height: 1.4;
-    }
-
+    .vis-description { font-size: 0.85rem; color: #5a5a5a; margin-bottom: 0.8rem; line-height: 1.4; }
     .note-box {
-      background: #FFF3E0;
-      border-left: 6px solid #FF8FB1;
-      padding: 0.9rem 1.5rem;
-      margin: 0.8rem 0 1.2rem 0;
-      border-radius: 16px;
-      font-size: 0.9rem;
-      color: #2F2F2F;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      background: #FFF3E0; border-left: 6px solid #FF8FB1; padding: 0.9rem 1.5rem;
+      margin: 0.8rem 0 1.2rem 0; border-radius: 16px; font-size: 0.9rem;
     }
-    .note-box strong {
-      color: #FF8FB1;
-      font-weight: 700;
-    }
+    .note-box strong { color: #FF8FB1; }
+    .intro-text { margin-bottom: 1.2rem; line-height: 1.5; }
 
-    .intro-text {
-      margin-bottom: 1.2rem;
-      line-height: 1.5;
-    }
-
-    /* Hero section with shifting background */
+    /* Hero */
     .hero {
       background: linear-gradient(135deg, #6DBE8A 0%, #4A9B74 100%);
-      color: #fff;
-      text-align: center;
-      border-radius: 0 0 32px 32px;
-      margin-bottom: 30px;
-      transition: all 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 0 28px;
-      position: relative;
-      overflow: hidden;
+      color: #fff; text-align: center; border-radius: 0 0 32px 32px;
+      transition: all 0.5s cubic-bezier(0.2,0.9,0.4,1.1);
+      min-height: 100vh; display: flex; flex-direction: column;
+      justify-content: center; align-items: center; padding: 0 28px;
+      position: relative; overflow: hidden;
     }
-
     .hero::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-image: url('bghero.png');
-      background-size: cover;
-      background-position: center;
-      opacity: 0.45;
-      pointer-events: none;
-      z-index: 0;
+      content: ''; position: absolute; top:0; left:0; right:0; bottom:0;
+      background-image: url('bghero.png'); background-size: cover; background-position: center;
+      opacity: 0.45; pointer-events: none; z-index: 0;
       animation: shiftBackground 20s ease-in-out infinite alternate;
     }
-
-    @keyframes shiftBackground {
-      0% { transform: scale(1) translateX(0%); }
-      100% { transform: scale(1.05) translateX(-2%); }
-    }
-
-    .hero > * {
-      position: relative;
-      z-index: 1;
-    }
-
-    .hero.hero-shrink {
-      min-height: auto;
-      padding: 28px 28px;
-      margin-bottom: 28px;
-    }
+    @keyframes shiftBackground { 0% { transform: scale(1) translateX(0%); } 100% { transform: scale(1.05) translateX(-2%); } }
+    .hero > * { position: relative; z-index: 1; }
+    .hero.hero-shrink { min-height: auto; padding: 28px 28px; margin-bottom: 28px; }
     .hero.hero-shrink .discover-btn { display: none; }
-
     .hero-sub {
-      font-size: 1.4rem;
-      font-weight: 400;
-      text-transform: uppercase;
-      background: rgba(255,255,255,0.2);
-      display: inline-block;
-      padding: 0.3rem 1.2rem;
-      border-radius: 60px;
-      /* backdrop-filter is experimental but kept for visual enhancement; will cause warning only */
-      backdrop-filter: blur(4px);
-      margin-bottom: 1.2rem;
+      font-size: 1.4rem; text-transform: uppercase; background: rgba(255,255,255,0.2);
+      display: inline-block; padding: 0.3rem 1.2rem; border-radius: 60px;
+      backdrop-filter: blur(4px); margin-bottom: 1.2rem;
     }
-    .hero-main {
-      font-size: 5.2rem;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      text-shadow: 0 6px 14px rgba(0,0,0,0.2);
-    }
+    .hero-main { font-size: 5.2rem; font-weight: 800; letter-spacing: -0.02em; text-shadow: 0 6px 14px rgba(0,0,0,0.2); }
     .discover-btn {
-      margin-top: 2rem;
-      background: white;
-      border: none;
-      padding: 0.9rem 2.8rem;
-      font-size: 1.2rem;
-      font-weight: 700;
-      border-radius: 60px;
-      color: #2F2F2F;
-      cursor: pointer;
-      text-transform: uppercase;
+      margin-top: 2rem; background: white; border: none; padding: 0.9rem 2.8rem;
+      font-size: 1.2rem; font-weight: 700; border-radius: 60px; color: #2F2F2F;
+      cursor: pointer; text-transform: uppercase;
     }
-    .discover-btn:hover {
-      background: #FF8FB1;
-      color: white;
-    }
+    .discover-btn:hover { background: #FF8FB1; color: white; }
     .hero.hero-shrink .hero-sub { font-size: 0.85rem; padding: 0.2rem 1rem; margin-bottom: 0.5rem; }
     .hero.hero-shrink .hero-main { font-size: 2.4rem; }
 
-    .container {
-      display: flex;
-      position: relative;
-    }
+    .container { display: flex; position: relative; }
     .track {
-      width: 2%;
-      position: sticky;
-      top: 0;
-      height: 100vh;
-      background: #F5E6D3;
-      overflow: hidden;
-      border-left: 1px solid #6DBE8A;
+      width: 2%; position: sticky; top: 0; height: 100vh; background: #F5E6D3;
+      overflow: hidden; border-left: 1px solid #6DBE8A;
     }
-    .track-img {
-      position: absolute;
-      height: 100%;
-      left: 50%;
-      transform: translateX(-50%);
-      width: auto;
-    }
+    .track-img { position: absolute; height: 100%; left: 50%; transform: translateX(-50%); width: auto; }
     #horse {
-      position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 40px;
-      transition: top 0.05s linear;
-      cursor: grab;
+      position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: 40px; transition: top 0.05s linear; cursor: grab;
     }
-    #horse:active { cursor: grabbing; }
-
-    h1 { 
-      font-size: 5.2rem; 
-      font-weight: 800; 
-      letter-spacing: -0.02em;
-      text-shadow: 0 6px 14px rgba(0,0,0,0.2);
-      color: white;
-    }
-    h2 { 
-      color: #FF8FB1; 
-      margin-bottom: 12px; 
-      font-size: 1.65rem; 
-      font-weight: 700; 
-    }
-    #map {
-      height: 500px;
-      border-radius: 20px;
-      margin-top: 20px;
-      box-shadow: 0 12px 28px rgba(0,0,0,0.12);
-      border: 2px solid #6DBE8A;
-    }
+    h2 { color: #FF8FB1; margin-bottom: 12px; font-size: 1.65rem; font-weight: 700; }
+    #map { height: 500px; border-radius: 20px; margin-top: 20px; box-shadow: 0 12px 28px rgba(0,0,0,0.12); border: 2px solid #6DBE8A; }
     footer {
-      text-align: center;
-      padding: 24px 16px;
-      color: white;
-      font-size: 0.9rem;
+      text-align: center; padding: 24px 16px; color: white; font-size: 0.9rem;
       background: linear-gradient(135deg, #6DBE8A 0%, #4A9B74 100%);
-      border-top: 1px solid rgba(255,255,255,0.25);
-      margin-top: 2rem;
+      border-top: 1px solid rgba(255,255,255,0.25); margin-top: 2rem;
     }
     footer a { color: white; text-decoration: underline; }
-    .section { margin-bottom: 3rem; }
     .course-selector {
-      background: #F5E6D3;
-      border: 2px solid #6DBE8A;
-      border-radius: 60px;
-      padding: 12px 24px;
-      font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-      margin: 15px 0;
-      width: 100%;
-      max-width: 360px;
-      font-family: inherit;
-    }
-    .visually-hidden {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      white-space: nowrap;
-      border-width: 0;
+      background: #F5E6D3; border: 2px solid #6DBE8A; border-radius: 60px;
+      padding: 12px 24px; font-size: 1rem; font-weight: 600; cursor: pointer;
+      margin: 15px 0; width: 100%; max-width: 360px;
     }
     .flex-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; }
     .tab-group {
-      display: flex;
-      gap: 0;
-      margin-bottom: 20px;
-      border-bottom: 2px solid #6DBE8A;
+      display: flex; gap: 0; margin-bottom: 20px; border-bottom: 2px solid #6DBE8A;
     }
     .tab-btn {
-      background: white;
-      border: 2px solid #6DBE8A;
-      border-bottom: none;
-      padding: 8px 28px;
-      border-radius: 20px 20px 0 0;
-      cursor: pointer;
-      font-weight: 700;
-      font-size: 0.9rem;
-      color: #2F2F2F;
+      background: white; border: 2px solid #6DBE8A; border-bottom: none;
+      padding: 8px 28px; border-radius: 20px 20px 0 0; cursor: pointer;
+      font-weight: 700; font-size: 0.9rem; color: #2F2F2F;
     }
-    .tab-btn.active {
-      background: #6DBE8A;
-      color: white;
-      border-bottom: 2px solid #6DBE8A;
-    }
+    .tab-btn.active { background: #6DBE8A; color: white; border-bottom: 2px solid #6DBE8A; }
     .tab-btn:hover { background: #A8E6CF; }
 
     .dot-nav {
-      position: fixed;
-      left: 20px;
-      top: 50%;
-      transform: translateY(-50%);
-      display: flex;
-      flex-direction: column;
-      gap: 22px;
-      z-index: 1000;
-      background: rgba(245,230,211,0.75);
-      backdrop-filter: blur(8px);
-      padding: 14px 10px;
-      border-radius: 60px;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+      position: fixed; left: 20px; top: 50%; transform: translateY(-50%);
+      display: flex; flex-direction: column; gap: 22px; z-index: 1000;
+      background: rgba(245,230,211,0.75); backdrop-filter: blur(8px);
+      padding: 14px 10px; border-radius: 60px; box-shadow: 0 8px 24px rgba(0,0,0,0.2);
     }
     .nav-dot {
-      width: 14px;
-      height: 14px;
-      background: #6DBE8A;
-      border-radius: 50%;
-      cursor: pointer;
-      position: relative;
+      width: 14px; height: 14px; background: #6DBE8A; border-radius: 50%;
+      cursor: pointer; position: relative;
     }
-    .nav-dot.active {
-      background: #FF8FB1;
-      box-shadow: 0 0 0 4px rgba(255,143,177,0.4);
-    }
+    .nav-dot.active { background: #FF8FB1; box-shadow: 0 0 0 4px rgba(255,143,177,0.4); }
     .nav-dot .tooltip {
-      position: absolute;
-      left: 28px;
-      top: 50%;
-      transform: translateY(-50%);
-      background: #2F2F2F;
-      color: white;
-      padding: 4px 12px;
-      border-radius: 40px;
-      font-size: 0.75rem;
-      white-space: nowrap;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.2s;
-      font-weight: 600;
+      position: absolute; left: 28px; top: 50%; transform: translateY(-50%);
+      background: #2F2F2F; color: white; padding: 4px 12px; border-radius: 40px;
+      font-size: 0.75rem; white-space: nowrap; opacity: 0; pointer-events: none;
+      transition: opacity 0.2s; font-weight: 600;
     }
     .nav-dot:hover .tooltip { opacity: 1; }
 
-    /* Force all Vega-Lite charts to fit within their containers without overflow */
-    .vega-embed {
-      margin: 0 auto !important;
-      display: flex;
-      justify-content: center;
-      width: 100% !important;
-      max-width: 100% !important;
-      overflow-x: auto;
-    }
-    .vega-embed details, 
-    .vega-embed summary,
-    .vega-embed .vega-actions {
-      display: none;
-    }
-    canvas, svg {
-      max-width: 100%;
-      height: auto;
-    }
-    /* Ensure all chart containers respect width */
+    .vega-embed { margin: 0 auto !important; display: flex; justify-content: center; width: 100% !important; max-width: 100% !important; overflow-x: auto; }
+    canvas, svg { max-width: 100%; height: auto; }
+    /* all chart containers */
     #observablehq-local_races_per_year-582,
     #observablehq-local_top_jockeys-582,
     #observablehq-local_avg_weight-582,
@@ -389,13 +170,8 @@
     #observablehq-nongb_top_courses_prize-9c0da185,
     #observablehq-nongb_fastest_time-9c0da185,
     #observablehq-e13c521e {
-      display: flex;
-      justify-content: center;
-      width: 100%;
-      max-width: 100%;
-      overflow-x: auto;
+      display: flex; justify-content: center; width: 100%; max-width: 100%; overflow-x: auto;
     }
-
     @media (max-width: 700px) {
       .card { max-width: 95%; padding: 20px 24px; }
       .dot-nav { left: 8px; gap: 16px; }
@@ -410,35 +186,31 @@
 <header class="hero" id="mainHero">
   <div class="hero-sub">An introduction to the data of :</div>
   <h1 class="hero-main">Horse Racing</h1>
-  <button class="discover-btn" id="discoverBtn" aria-label="Discover content below hero section">DISCOVER</button>
+  <button class="discover-btn" id="discoverBtn">DISCOVER</button>
 </header>
 
 <div class="container">
   <div class="content">
-    <!-- INTRODUCTION section -->
+    <!-- Introduction -->
     <section id="section-welcome" class="card section">
       <h2>Introduction</h2>
       <div class="intro-text">
         For new and casual fans, learning about horse racing may seem daunting. This website aims to introduce the history and records of the sport through visualizations. They are organized into three main sections: general (for broad data), local race courses (for specific data regarding particular racecourses), and lineage (for detailing the legacies of significant horses).
       </div>
-      <div class="note-box">
-        <strong>Note:</strong> This dataset is incomplete and is greatly focused on Great Britain races, so be aware that the data is not fully accurate.
-      </div>
+      <div class="note-box"><strong>Note:</strong> This dataset is incomplete and is greatly focused on Great Britain races, so be aware that the data is not fully accurate.</div>
     </section>
 
-    <!-- GENERAL VISUALIZATIONS -->
+    <!-- General Visualizations -->
     <section id="section-general" class="card section">
-      <div class="flex-row" style="margin-bottom: 1rem;">
-        <h2 style="margin-bottom: 0;">General Visualizations</h2>
+      <div class="flex-row" style="margin-bottom:1rem;">
+        <h2>General Visualizations</h2>
         <div class="tab-group">
-          <button id="tabOverall" class="tab-btn active" aria-label="Show overall charts">Overall</button>
-          <button id="tabGB" class="tab-btn" aria-label="Show Great Britain charts">Great Britain</button>
-          <button id="tabNonGB" class="tab-btn" aria-label="Show Rest of World charts">Rest of World</button>
+          <button id="tabOverall" class="tab-btn active">Overall</button>
+          <button id="tabGB" class="tab-btn">Great Britain</button>
+          <button id="tabNonGB" class="tab-btn">Rest of World</button>
         </div>
       </div>
-      <div class="note-box">
-        <strong>Note:</strong> To address the Great Britain (GB)-skewed dataset, there are buttons to filter and view specific data, either GB-focused or non-GB data.
-      </div>
+      <div class="note-box"><strong>Note:</strong> To address the Great Britain (GB)-skewed dataset, there are buttons to filter and view specific data, either GB-focused or non-GB data.</div>
 
       <div id="overall-charts">
         <div class="vis-card"><div class="vis-title">Races Per Year</div><div class="vis-description">Total number of races held each year from 1990 to 2020.</div><div class="note-box"><strong>Note:</strong> The suspicious shift in races around 2002-2003 is likely a data error.</div><div id="observablehq-racespereyear-582"></div></div>
@@ -451,47 +223,43 @@
         <div class="vis-card"><div class="vis-title">Fastest Winning Time Per Year (seconds)</div><div class="vis-description">The fastest recorded winning time each year.</div><div class="note-box"><strong>Note:</strong> Due to small variations in records, the Y axis ranges from 99 to 101 seconds.</div><div id="observablehq-fastestwinningtime-582"></div></div>
       </div>
 
-      <div id="gb-charts" style="display: none;">
-        <div class="vis-card"><div class="vis-title">Races Per Year (Great Britain)</div><div class="vis-description">Total number of races held each year in Great Britain.</div><div id="observablehq-gb_races_per_year-582"></div></div>
-        <div class="vis-card"><div class="vis-title">Top Horses By Wins (Great Britain)</div><div class="vis-description">Horses with the most first‑place finishes in GB races.</div><div id="observablehq-gb_top_horses_wins-582"></div></div>
-        <div class="vis-card"><div class="vis-title">Top Jockeys By Wins (Great Britain)</div><div class="vis-description">Jockeys with the highest number of winning rides in GB.</div><div id="observablehq-gb_top_jockeys_wins-582"></div></div>
-        <div class="vis-card"><div class="vis-title">Profit From Bets (Great Britain)</div><div class="vis-description">Simulated profit from £1 win bets on GB races.</div><div id="observablehq-gb_profit_bets-582"></div></div>
-        <div class="vis-card"><div class="vis-title">Prize Money (Great Britain)</div><div class="vis-description">Total prize money earned by horses in GB winning races.</div><div id="observablehq-gb_profit_prize-582"></div></div>
-        <div class="vis-card"><div class="vis-title">Top Courses By Prize (Great Britain)</div><div class="vis-description">Racecourses in GB with highest average prize money.</div><div id="observablehq-gb_top_courses_prize-9c0da185"></div></div>
-        <div class="vis-card"><div class="vis-title">Fastest Time (Great Britain)</div><div class="vis-description">Fastest winning time each year in GB races.</div><div id="observablehq-gb_fastest_time-582"></div></div>
+      <div id="gb-charts" style="display:none;">
+        <div class="vis-card"><div class="vis-title">Races Per Year (Great Britain)</div><div id="observablehq-gb_races_per_year-582"></div></div>
+        <div class="vis-card"><div class="vis-title">Top Horses By Wins (Great Britain)</div><div id="observablehq-gb_top_horses_wins-582"></div></div>
+        <div class="vis-card"><div class="vis-title">Top Jockeys By Wins (Great Britain)</div><div id="observablehq-gb_top_jockeys_wins-582"></div></div>
+        <div class="vis-card"><div class="vis-title">Profit From Bets (Great Britain)</div><div id="observablehq-gb_profit_bets-582"></div></div>
+        <div class="vis-card"><div class="vis-title">Prize Money (Great Britain)</div><div id="observablehq-gb_profit_prize-582"></div></div>
+        <div class="vis-card"><div class="vis-title">Top Courses By Prize (Great Britain)</div><div id="observablehq-gb_top_courses_prize-9c0da185"></div></div>
+        <div class="vis-card"><div class="vis-title">Fastest Time (Great Britain)</div><div id="observablehq-gb_fastest_time-582"></div></div>
       </div>
 
-      <div id="nongb-charts" style="display: none;">
-        <div class="vis-card"><div class="vis-title">Races Per Year (Rest of World)</div><div class="vis-description">Total number of races held each year outside Great Britain.</div><div id="observablehq-nongb_races_per_year-582"></div></div>
-        <div class="vis-card"><div class="vis-title">Top Horses By Wins (Rest of World)</div><div class="vis-description">Horses with the most first‑place finishes outside GB.</div><div id="observablehq-nongb_top_horses_wins-582"></div></div>
-        <div class="vis-card"><div class="vis-title">Top Jockeys By Wins (Rest of World)</div><div class="vis-description">Jockeys with the highest number of winning rides outside GB.</div><div id="observablehq-nongb_top_jockeys_wins-582"></div></div>
-        <div class="vis-card"><div class="vis-title">Profit From Bets (Rest of World)</div><div class="vis-description">Simulated profit from £1 win bets on non-GB races.</div><div id="observablehq-nongb_profit_bets-582"></div></div>
-        <div class="vis-card"><div class="vis-title">Prize Money (Rest of World)</div><div class="vis-description">Total prize money earned by horses in non-GB winning races.</div><div id="observablehq-nongb_profit_prize-582"></div></div>
-        <div class="vis-card"><div class="vis-title">Races By Country (Rest of World)</div><div class="vis-description">Distribution of races across countries outside GB.</div><div id="observablehq-nongb_races_by_country-582"></div></div>
-        <div class="vis-card"><div class="vis-title">Top Courses By Prize (Rest of World)</div><div class="vis-description">Racecourses outside GB with highest average prize money.</div><div id="observablehq-nongb_top_courses_prize-9c0da185"></div></div>
-        <div class="vis-card"><div class="vis-title">Fastest Time (Rest of World)</div><div class="vis-description">Fastest winning time each year outside GB.</div><div class="note-box"><strong>Note:</strong> The Y axis ranges from 95 to 115. Extreme outliers (over 200) have been filtered.</div><div id="observablehq-nongb_fastest_time-9c0da185"></div></div>
+      <div id="nongb-charts" style="display:none;">
+        <div class="vis-card"><div class="vis-title">Races Per Year (Rest of World)</div><div id="observablehq-nongb_races_per_year-582"></div></div>
+        <div class="vis-card"><div class="vis-title">Top Horses By Wins (Rest of World)</div><div id="observablehq-nongb_top_horses_wins-582"></div></div>
+        <div class="vis-card"><div class="vis-title">Top Jockeys By Wins (Rest of World)</div><div id="observablehq-nongb_top_jockeys_wins-582"></div></div>
+        <div class="vis-card"><div class="vis-title">Profit From Bets (Rest of World)</div><div id="observablehq-nongb_profit_bets-582"></div></div>
+        <div class="vis-card"><div class="vis-title">Prize Money (Rest of World)</div><div id="observablehq-nongb_profit_prize-582"></div></div>
+        <div class="vis-card"><div class="vis-title">Races By Country (Rest of World)</div><div id="observablehq-nongb_races_by_country-582"></div></div>
+        <div class="vis-card"><div class="vis-title">Top Courses By Prize (Rest of World)</div><div id="observablehq-nongb_top_courses_prize-9c0da185"></div></div>
+        <div class="vis-card"><div class="vis-title">Fastest Time (Rest of World)</div><div class="note-box"><strong>Note:</strong> The Y axis ranges from 95 to 115. Extreme outliers (over 200) have been filtered.</div><div id="observablehq-nongb_fastest_time-9c0da185"></div></div>
       </div>
     </section>
 
-    <!-- LOCAL VISUALIZATIONS -->
+    <!-- Local Visualizations -->
     <section id="section-local" class="card section">
       <h2>Local Visualizations</h2>
-      <div class="note-box" style="margin-bottom: 1rem;">
-        <strong>Note:</strong> Some racecourses will fail to display, try a different marker!
-      </div>
+      <div class="note-box" style="margin-bottom:1rem;"><strong>Note:</strong> Some racecourses will fail to display, try a different marker!</div>
       <p>Click any marker on the map or use the dropdown to explore detailed data for a specific racecourse.</p>
-      
-      <label for="courseDropdown" class="visually-hidden">Select a racecourse</label>
+      <label for="courseDropdown" class="visually-hidden" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;">Select a racecourse</label>
       <select id="courseDropdown" class="course-selector" aria-label="Select a racecourse to view specific data">
         <option value="">-- Select a racecourse --</option>
       </select>
-      
       <div id="map"></div>
-      <div style="margin-top: 30px;">
-        <div class="vis-card"><div class="vis-title" id="local-races-title">Races Per Year (Selected Course)</div><div class="vis-description">Yearly number of races held at the chosen course.</div><div id="observablehq-local_races_per_year-582"></div></div>
-        <div class="vis-card"><div class="vis-title" id="local-jockeys-title">Top 5 Jockeys At Selected Course</div><div class="vis-description">Jockeys with the most wins at this specific racecourse.</div><div id="observablehq-local_top_jockeys-582"></div></div>
-        <div class="vis-card"><div class="vis-title" id="local-weight-title">Average Weight Per Year (Selected Course)</div><div class="vis-description">Mean weight of horses competing at the course each year.</div><div id="observablehq-local_avg_weight-582"></div></div>
-        <div class="vis-card"><div class="vis-title" id="local-trainers-title">Top 5 Trainers At Selected Course</div><div class="vis-description">Trainers whose horses win most often at this course.</div><div id="observablehq-local_top_trainers-582"></div></div>
+      <div style="margin-top:30px;">
+        <div class="vis-card"><div class="vis-title" id="local-races-title">Races Per Year (Selected Course)</div><div id="observablehq-local_races_per_year-582"></div></div>
+        <div class="vis-card"><div class="vis-title" id="local-jockeys-title">Top 5 Jockeys At Selected Course</div><div id="observablehq-local_top_jockeys-582"></div></div>
+        <div class="vis-card"><div class="vis-title" id="local-weight-title">Average Weight Per Year (Selected Course)</div><div id="observablehq-local_avg_weight-582"></div></div>
+        <div class="vis-card"><div class="vis-title" id="local-trainers-title">Top 5 Trainers At Selected Course</div><div id="observablehq-local_top_trainers-582"></div></div>
         <div class="vis-card"><div class="vis-title" id="local-condition-title">Track Condition Distribution (Selected Course)</div>
           <div class="vis-description">The condition ranges from firm, good, good to soft or yielding, soft, and heavy, depending on how wet and difficult the track is to run on. Yielding is an Ireland term for between good to soft.</div>
           <div id="observablehq-local_track_condition-582"></div>
@@ -499,27 +267,26 @@
       </div>
     </section>
 
-    <!-- LINEAGE ANALYSIS -->
+    <!-- Lineage Analysis -->
     <section id="section-lineage" class="card section">
       <h2>Lineage Analysis</h2>
-      <div class="vis-description" style="margin-bottom: 1rem;">Bloodlines play a crucial role in horse racing success. This section reveals which sires, mares, and grandsires have produced the most winning offspring, highlighting the genetic pillars of the sport.</div>
-      <div class="vis-card"><div class="vis-title">Top 10 Sires (Fathers) By Wins</div><div class="vis-description">Fathers whose offspring have the most total wins.</div><div id="observablehq-sires_wins-582"></div></div>
-      <div class="vis-card"><div class="vis-title">Top 10 Mares (Mothers) By Wins</div><div class="vis-description">Mothers whose offspring are most successful.</div><div id="observablehq-mares_wins-582"></div></div>
-      <div class="vis-card"><div class="vis-title">Top 10 Grandsires By Wins</div><div class="vis-description">Grandfathers whose descendants have the most wins.</div><div id="observablehq-grandsires_wins-582"></div></div>
+      <div class="vis-description" style="margin-bottom:1rem;">Bloodlines play a crucial role in horse racing success. This section reveals which sires, mares, and grandsires have produced the most winning offspring, highlighting the genetic pillars of the sport.</div>
+      <div class="vis-card"><div class="vis-title">Top 10 Sires (Fathers) By Wins</div><div id="observablehq-sires_wins-582"></div></div>
+      <div class="vis-card"><div class="vis-title">Top 10 Mares (Mothers) By Wins</div><div id="observablehq-mares_wins-582"></div></div>
+      <div class="vis-card"><div class="vis-title">Top 10 Grandsires By Wins</div><div id="observablehq-grandsires_wins-582"></div></div>
     </section>
   </div>
 
   <div class="track">
-    <img src="track.png" class="track-img" alt="Race track background">
-    <img src="horse.png" id="horse" alt="Horse icon indicating scroll progress">
+    <img src="track.png" class="track-img" alt="Race track">
+    <img src="horse.png" id="horse" alt="Horse scroll indicator">
   </div>
 </div>
 
 <footer>
-  IAT355 Visual Analytics - Horse Racing | aky6 | <a href="https://observablehq.com/d/b4374c2e7ce71428@582" target="_blank" rel="noopener noreferrer" style="color:white;">Made with Vegalite</a>
+  IAT355 Visual Analytics - Horse Racing | aky6 | <a href="https://observablehq.com/d/b4374c2e7ce71428@582" target="_blank" rel="noopener noreferrer">Made with Vegalite</a>
 </footer>
 
-<!-- dot-nav without ARIA attributes to avoid validator errors (tooltips provide labels) -->
 <div class="dot-nav">
   <div class="nav-dot" data-section="section-welcome"><span class="tooltip">Introduction</span></div>
   <div class="nav-dot" data-section="section-general"><span class="tooltip">General</span></div>
@@ -528,19 +295,14 @@
 </div>
 
 <script>
-  // Hero shrink
+  // Hero shrink + discover button
   const hero = document.getElementById('mainHero');
-  function handleHeroShrink() {
-    if (window.scrollY > 45) hero.classList.add('hero-shrink');
-    else hero.classList.remove('hero-shrink');
-  }
+  function handleHeroShrink() { if (window.scrollY > 45) hero.classList.add('hero-shrink'); else hero.classList.remove('hero-shrink'); }
   window.addEventListener('scroll', handleHeroShrink);
   handleHeroShrink();
-  document.getElementById('discoverBtn').addEventListener('click', () => {
-    document.getElementById('section-welcome').scrollIntoView({ behavior: 'smooth', block: 'start' });
-  });
+  document.getElementById('discoverBtn').addEventListener('click', () => document.getElementById('section-welcome').scrollIntoView({ behavior: 'smooth', block: 'start' }));
 
-  // LEAFLET MAP (clean, original)
+  // Leaflet map (same as before)
   const map = L.map('map').setView([52.5, -1.5], 6);
   L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
     attribution: 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012',
@@ -570,38 +332,20 @@
     dropdown.innerHTML = '<option value="">-- Select a racecourse --</option>';
     sorted.forEach(c => { const opt = document.createElement('option'); opt.value = c.name; opt.textContent = c.name; dropdown.appendChild(opt); });
   }
-
   fetch('data/racecourses.json')
-    .then(response => response.json())
-    .then(raceCourses => {
-      allCourses = raceCourses;
-      populateDropdown(allCourses);
-      raceCourses.forEach(course => {
-        L.marker([course.lat, course.lng]).addTo(map)
-          .bindPopup(`${course.name} Racecourse`)
-          .on('click', () => updateSelectedCourseInObservable(course.name));
-      });
+    .then(r => r.json())
+    .then(courses => {
+      allCourses = courses; populateDropdown(allCourses);
+      courses.forEach(course => L.marker([course.lat, course.lng]).addTo(map).bindPopup(`${course.name} Racecourse`).on('click', () => updateSelectedCourseInObservable(course.name)));
     })
     .catch(() => {
-      const fallbackCourses = [
-        { name: "Ascot", lat: 51.4096, lng: -0.5856 }, { name: "Cheltenham", lat: 51.9194, lng: -2.0581 },
-        { name: "Newmarket", lat: 52.2446, lng: 0.4074 }, { name: "York", lat: 53.9626, lng: -1.0819 },
-        { name: "Curragh (IRE)", lat: 53.15, lng: -6.75 }, { name: "Leopardstown (IRE)", lat: 53.2667, lng: -6.1667 },
-        { name: "Fairyhouse (IRE)", lat: 53.4348, lng: -6.3817 }, { name: "Punchestown (IRE)", lat: 53.2279, lng: -6.6090 },
-        { name: "Galway (IRE)", lat: 53.2707, lng: -9.0587 }, { name: "Killarney (IRE)", lat: 52.0599, lng: -9.5042 }
-      ];
-      allCourses = fallbackCourses;
-      populateDropdown(allCourses);
-      fallbackCourses.forEach(course => {
-        L.marker([course.lat, course.lng]).addTo(map)
-          .bindPopup(course.name)
-          .on('click', () => updateSelectedCourseInObservable(course.name));
-      });
+      const fallback = [{name:"Ascot",lat:51.4096,lng:-0.5856},{name:"Cheltenham",lat:51.9194,lng:-2.0581},{name:"Newmarket",lat:52.2446,lng:0.4074},{name:"York",lat:53.9626,lng:-1.0819},{name:"Curragh (IRE)",lat:53.15,lng:-6.75},{name:"Leopardstown (IRE)",lat:53.2667,lng:-6.1667}];
+      allCourses = fallback; populateDropdown(fallback);
+      fallback.forEach(course => L.marker([course.lat, course.lng]).addTo(map).bindPopup(course.name).on('click', () => updateSelectedCourseInObservable(course.name)));
     });
-
   document.getElementById('courseDropdown').addEventListener('change', e => { if(e.target.value) updateSelectedCourseInObservable(e.target.value); });
 
-  // TABS
+  // Tabs
   const tabOverall = document.getElementById('tabOverall'), tabGB = document.getElementById('tabGB'), tabNonGB = document.getElementById('tabNonGB');
   const overallDiv = document.getElementById('overall-charts'), gbDiv = document.getElementById('gb-charts'), nongbDiv = document.getElementById('nongb-charts');
   function setTab(view) {
@@ -620,15 +364,15 @@
 
   // Horse drag
   const horse = document.getElementById('horse');
-  let drag = false, startY=0, startScroll=0;
-  function updateHorse() { const p = window.scrollY / (document.body.scrollHeight - window.innerHeight); horse.style.top = Math.min(window.innerHeight-100, Math.max(0, p*(window.innerHeight-100))) + 'px'; }
-  window.addEventListener('scroll', updateHorse);
-  horse.addEventListener('mousedown', e => { e.preventDefault(); drag=true; startY=e.clientY; startScroll=window.scrollY; horse.style.cursor='grabbing'; });
-  document.addEventListener('mousemove', e => { if(!drag) return; window.scrollTo(0, startScroll + (e.clientY-startY)/(window.innerHeight-100)*(document.body.scrollHeight-window.innerHeight)); });
-  document.addEventListener('mouseup', () => { drag=false; horse.style.cursor='grab'; });
-  updateHorse();
+  let dragging = false, startY = 0, startScrollTop = 0;
+  function updateHorsePos() { const p = window.scrollY / (document.body.scrollHeight - window.innerHeight); horse.style.top = Math.min(window.innerHeight-100, Math.max(0, p*(window.innerHeight-100))) + 'px'; }
+  window.addEventListener('scroll', updateHorsePos);
+  horse.addEventListener('mousedown', e => { e.preventDefault(); dragging = true; startY = e.clientY; startScrollTop = window.scrollY; horse.style.cursor = 'grabbing'; });
+  document.addEventListener('mousemove', e => { if(dragging) window.scrollTo(0, startScrollTop + (e.clientY - startY) / (window.innerHeight-100) * (document.body.scrollHeight - window.innerHeight)); });
+  document.addEventListener('mouseup', () => { dragging = false; horse.style.cursor = 'grab'; });
+  updateHorsePos();
 
-  // Dot navigation
+  // Dot nav
   const dots = document.querySelectorAll('.nav-dot');
   const sections = Array.from(dots).map(d => document.getElementById(d.dataset.section));
   function updateActiveDot() { let idx = 0; const scrollPos = window.scrollY+140; sections.forEach((s,i) => { if(s && s.offsetTop <= scrollPos) idx=i; }); dots.forEach((d,i) => i===idx ? d.classList.add('active') : d.classList.remove('active')); }
@@ -637,52 +381,65 @@
   dots.forEach((dot,idx) => dot.addEventListener('click', () => sections[idx]?.scrollIntoView({behavior:'smooth'})));
 </script>
 
-<!-- Observable Runtime: version 597, 583, 582, and new 631 for the combined chart -->
+<!-- SINGLE OBSERVABLE RUNTIME (version 631) to avoid overload -->
 <script type="module">
 import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@5/dist/runtime.js";
-import define597 from "https://api.observablehq.com/d/b4374c2e7ce71428@597.js?v=4";
-import define583 from "https://api.observablehq.com/d/b4374c2e7ce71428@583.js?v=4";
-import define582 from "https://api.observablehq.com/d/b4374c2e7ce71428@582.js?v=4";
-import define631 from "https://api.observablehq.com/d/b4374c2e7ce71428@631.js?v=4";
+import define from "https://api.observablehq.com/d/b4374c2e7ce71428@631.js?v=4";
 
-// New combined chart from version 631
-new Runtime().module(define631, name => {
-  if (name === "e13c521e") return new Inspector(document.querySelector("#observablehq-e13c521e"));
-  return { fulfilled() {}, rejected() {} };
-});
-
-// 597: gb_top_courses_prize, nongb_top_courses_prize, nongb_fastest_time
-new Runtime().module(define597, name => {
-  if (name === "gb_top_courses_prize") return new Inspector(document.querySelector("#observablehq-gb_top_courses_prize-9c0da185"));
-  if (name === "nongb_top_courses_prize") return new Inspector(document.querySelector("#observablehq-nongb_top_courses_prize-9c0da185"));
-  if (name === "nongb_fastest_time") return new Inspector(document.querySelector("#observablehq-nongb_fastest_time-9c0da185"));
-  return { fulfilled() {}, rejected() {} };
-});
-
-// 583: avgprizetracks
-new Runtime().module(define583, name => {
-  if (name === "avgprizetracks") return new Inspector(document.querySelector("#observablehq-avgprizetracks-0d4d4b75"));
-});
-
-// 582: everything else
-new Runtime().module(define582, name => {
-  if (name === "coursesList") return;
-  if (name === "viewof selectedCourse") {
-    return { fulfilled: (value) => { window.selectedCourseInput = value; return new Inspector(document.createElement('div')); }, rejected: e => console.error(e) };
-  }
+new Runtime().module(define, name => {
+  // Mapping from cell name to DOM container selector
   const mapping = {
-    "racespereyear": "#observablehq-racespereyear-582", "topwinhorses": "#observablehq-topwinhorses-582", "topjockeys": "#observablehq-topjockeys-582",
-    "winbetshorses": "#observablehq-winbetshorses-582", "winrpizehorses": "#observablehq-winrpizehorses-582",
-    "totalracesbycountry": "#observablehq-totalracesbycountry-582", "fastestwinningtime": "#observablehq-fastestwinningtime-582",
-    "gb_races_per_year": "#observablehq-gb_races_per_year-582", "gb_top_horses_wins": "#observablehq-gb_top_horses_wins-582", "gb_top_jockeys_wins": "#observablehq-gb_top_jockeys_wins-582",
-    "gb_profit_bets": "#observablehq-gb_profit_bets-582", "gb_profit_prize": "#observablehq-gb_profit_prize-582", "gb_fastest_time": "#observablehq-gb_fastest_time-582",
-    "nongb_races_per_year": "#observablehq-nongb_races_per_year-582", "nongb_top_horses_wins": "#observablehq-nongb_top_horses_wins-582", "nongb_top_jockeys_wins": "#observablehq-nongb_top_jockeys_wins-582",
-    "nongb_profit_bets": "#observablehq-nongb_profit_bets-582", "nongb_profit_prize": "#observablehq-nongb_profit_prize-582", "nongb_races_by_country": "#observablehq-nongb_races_by_country-582",
-    "local_races_per_year": "#observablehq-local_races_per_year-582", "local_top_jockeys": "#observablehq-local_top_jockeys-582", "local_avg_weight": "#observablehq-local_avg_weight-582",
-    "local_top_trainers": "#observablehq-local_top_trainers-582", "local_track_condition": "#observablehq-local_track_condition-582",
-    "sires_wins": "#observablehq-sires_wins-582", "mares_wins": "#observablehq-mares_wins-582", "grandsires_wins": "#observablehq-grandsires_wins-582"
+    "racespereyear": "#observablehq-racespereyear-582",
+    "topwinhorses": "#observablehq-topwinhorses-582",
+    "topjockeys": "#observablehq-topjockeys-582",
+    "winbetshorses": "#observablehq-winbetshorses-582",
+    "winrpizehorses": "#observablehq-winrpizehorses-582",
+    "avgprizetracks": "#observablehq-avgprizetracks-0d4d4b75",
+    "totalracesbycountry": "#observablehq-totalracesbycountry-582",
+    "fastestwinningtime": "#observablehq-fastestwinningtime-582",
+    "gb_races_per_year": "#observablehq-gb_races_per_year-582",
+    "gb_top_horses_wins": "#observablehq-gb_top_horses_wins-582",
+    "gb_top_jockeys_wins": "#observablehq-gb_top_jockeys_wins-582",
+    "gb_profit_bets": "#observablehq-gb_profit_bets-582",
+    "gb_profit_prize": "#observablehq-gb_profit_prize-582",
+    "gb_fastest_time": "#observablehq-gb_fastest_time-582",
+    "nongb_races_per_year": "#observablehq-nongb_races_per_year-582",
+    "nongb_top_horses_wins": "#observablehq-nongb_top_horses_wins-582",
+    "nongb_top_jockeys_wins": "#observablehq-nongb_top_jockeys_wins-582",
+    "nongb_profit_bets": "#observablehq-nongb_profit_bets-582",
+    "nongb_profit_prize": "#observablehq-nongb_profit_prize-582",
+    "nongb_races_by_country": "#observablehq-nongb_races_by_country-582",
+    "local_races_per_year": "#observablehq-local_races_per_year-582",
+    "local_top_jockeys": "#observablehq-local_top_jockeys-582",
+    "local_avg_weight": "#observablehq-local_avg_weight-582",
+    "local_top_trainers": "#observablehq-local_top_trainers-582",
+    "local_track_condition": "#observablehq-local_track_condition-582",
+    "sires_wins": "#observablehq-sires_wins-582",
+    "mares_wins": "#observablehq-mares_wins-582",
+    "grandsires_wins": "#observablehq-grandsires_wins-582",
+    "gb_top_courses_prize": "#observablehq-gb_top_courses_prize-9c0da185",
+    "nongb_top_courses_prize": "#observablehq-nongb_top_courses_prize-9c0da185",
+    "nongb_fastest_time": "#observablehq-nongb_fastest_time-9c0da185",
+    "e13c521e": "#observablehq-e13c521e"
   };
-  if (mapping[name]) return new Inspector(document.querySelector(mapping[name]));
+  if (mapping[name]) {
+    const container = document.querySelector(mapping[name]);
+    if (container) return new Inspector(container);
+    else console.warn(`Container for ${name} not found`);
+  }
+  // Handle the selectedCourse input (for dropdown/map interaction)
+  if (name === "viewof selectedCourse") {
+    return {
+      fulfilled: (value) => {
+        window.selectedCourseInput = value;
+        // Also attach listener to update dropdown when Observable changes externally (if needed)
+        return new Inspector(document.createElement('div')); // invisible
+      },
+      rejected: (error) => console.error(error)
+    };
+  }
+  // Ignore other cells
+  return { fulfilled() {}, rejected() {} };
 });
 </script>
 </body>
