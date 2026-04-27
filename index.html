@@ -18,7 +18,6 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@observablehq/inspector@5/dist/inspector.css">
 
   <style>
-    /* === YOUR WORKING CSS (unchanged, full version) === */
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: "Hiragino Kakugo Pro", "Kakugo", "Hiragino Sans", "Segoe UI", system-ui, sans-serif;
@@ -47,7 +46,6 @@
     .note-box strong { color: #FF8FB1; }
     .intro-text { margin-bottom: 1.2rem; line-height: 1.5; }
 
-    /* Hero */
     .hero {
       background: linear-gradient(135deg, #6DBE8A 0%, #4A9B74 100%);
       color: #fff; text-align: center; border-radius: 0 0 32px 32px;
@@ -91,8 +89,14 @@
       position: absolute; top: 0; left: 50%; transform: translateX(-50%);
       width: 40px; transition: top 0.05s linear; cursor: grab;
     }
+    #horse:active { cursor: grabbing; }
+    h1 { font-size: 5.2rem; font-weight: 800; letter-spacing: -0.02em; text-shadow: 0 6px 14px rgba(0,0,0,0.2); color: white; }
     h2 { color: #FF8FB1; margin-bottom: 12px; font-size: 1.65rem; font-weight: 700; }
-    #map { height: 500px; border-radius: 20px; margin-top: 20px; box-shadow: 0 12px 28px rgba(0,0,0,0.12); border: 2px solid #6DBE8A; }
+    h3 { color: #FF8FB1; font-size: 1.3rem; font-weight: 600; margin: 1rem 0 0.5rem 0; }
+    #map {
+      height: 500px; border-radius: 20px; margin-top: 20px; box-shadow: 0 12px 28px rgba(0,0,0,0.12);
+      border: 2px solid #6DBE8A;
+    }
     footer {
       text-align: center; padding: 24px 16px; color: white; font-size: 0.9rem;
       background: linear-gradient(135deg, #6DBE8A 0%, #4A9B74 100%);
@@ -104,10 +108,9 @@
       padding: 12px 24px; font-size: 1rem; font-weight: 600; cursor: pointer;
       margin: 15px 0; width: 100%; max-width: 360px;
     }
+    .visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border-width: 0; }
     .flex-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; }
-    .tab-group {
-      display: flex; gap: 0; margin-bottom: 20px; border-bottom: 2px solid #6DBE8A;
-    }
+    .tab-group { display: flex; gap: 0; margin-bottom: 20px; border-bottom: 2px solid #6DBE8A; }
     .tab-btn {
       background: white; border: 2px solid #6DBE8A; border-bottom: none;
       padding: 8px 28px; border-radius: 20px 20px 0 0; cursor: pointer;
@@ -122,10 +125,7 @@
       background: rgba(245,230,211,0.75); backdrop-filter: blur(8px);
       padding: 14px 10px; border-radius: 60px; box-shadow: 0 8px 24px rgba(0,0,0,0.2);
     }
-    .nav-dot {
-      width: 14px; height: 14px; background: #6DBE8A; border-radius: 50%;
-      cursor: pointer; position: relative;
-    }
+    .nav-dot { width: 14px; height: 14px; background: #6DBE8A; border-radius: 50%; cursor: pointer; position: relative; }
     .nav-dot.active { background: #FF8FB1; box-shadow: 0 0 0 4px rgba(255,143,177,0.4); }
     .nav-dot .tooltip {
       position: absolute; left: 28px; top: 50%; transform: translateY(-50%);
@@ -137,7 +137,6 @@
 
     .vega-embed { margin: 0 auto !important; display: flex; justify-content: center; width: 100% !important; max-width: 100% !important; overflow-x: auto; }
     canvas, svg { max-width: 100%; height: auto; }
-    /* all chart containers */
     #observablehq-local_races_per_year-582,
     #observablehq-local_top_jockeys-582,
     #observablehq-local_avg_weight-582,
@@ -172,6 +171,12 @@
     #observablehq-e13c521e {
       display: flex; justify-content: center; width: 100%; max-width: 100%; overflow-x: auto;
     }
+    .report-section { background: #f9f5ef; border-left: 8px solid #FF8FB1; }
+    .report-section ul, .report-section p { margin-bottom: 0.8rem; line-height: 1.5; }
+    .report-section a { color: #6DBE8A; text-decoration: none; }
+    .report-section a:hover { text-decoration: underline; }
+    .sources-list { list-style: none; padding-left: 0; }
+    .sources-list li { margin-bottom: 0.3rem; }
     @media (max-width: 700px) {
       .card { max-width: 95%; padding: 20px 24px; }
       .dot-nav { left: 8px; gap: 16px; }
@@ -191,7 +196,6 @@
 
 <div class="container">
   <div class="content">
-    <!-- Introduction -->
     <section id="section-welcome" class="card section">
       <h2>Introduction</h2>
       <div class="intro-text">
@@ -200,7 +204,6 @@
       <div class="note-box"><strong>Note:</strong> This dataset is incomplete and is greatly focused on Great Britain races, so be aware that the data is not fully accurate.</div>
     </section>
 
-    <!-- General Visualizations -->
     <section id="section-general" class="card section">
       <div class="flex-row" style="margin-bottom:1rem;">
         <h2>General Visualizations</h2>
@@ -245,12 +248,11 @@
       </div>
     </section>
 
-    <!-- Local Visualizations -->
     <section id="section-local" class="card section">
       <h2>Local Visualizations</h2>
       <div class="note-box" style="margin-bottom:1rem;"><strong>Note:</strong> Some racecourses will fail to display, try a different marker!</div>
       <p>Click any marker on the map or use the dropdown to explore detailed data for a specific racecourse.</p>
-      <label for="courseDropdown" class="visually-hidden" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;">Select a racecourse</label>
+      <label for="courseDropdown" class="visually-hidden">Select a racecourse</label>
       <select id="courseDropdown" class="course-selector" aria-label="Select a racecourse to view specific data">
         <option value="">-- Select a racecourse --</option>
       </select>
@@ -267,13 +269,42 @@
       </div>
     </section>
 
-    <!-- Lineage Analysis -->
     <section id="section-lineage" class="card section">
       <h2>Lineage Analysis</h2>
       <div class="vis-description" style="margin-bottom:1rem;">Bloodlines play a crucial role in horse racing success. This section reveals which sires, mares, and grandsires have produced the most winning offspring, highlighting the genetic pillars of the sport.</div>
       <div class="vis-card"><div class="vis-title">Top 10 Sires (Fathers) By Wins</div><div id="observablehq-sires_wins-582"></div></div>
       <div class="vis-card"><div class="vis-title">Top 10 Mares (Mothers) By Wins</div><div id="observablehq-mares_wins-582"></div></div>
       <div class="vis-card"><div class="vis-title">Top 10 Grandsires By Wins</div><div id="observablehq-grandsires_wins-582"></div></div>
+    </section>
+
+    <!-- Report Section -->
+    <section class="card report-section" id="report-section">
+      <h2>Project Report</h2>
+      <h3>Motivation</h3>
+      <p>I recently became interested in learning about horse racing after seeing viral posts of the horses on social media and was captivated by their eccentric personalities and mannerisms. My motivations were to make a personal project, as well as learn more about the sport through making this.</p>
+      <h3>Problem</h3>
+      <p>The main problem I intend to solve with this website is data organization and accessibility. With horse race records, the data is very dense and extensive, so through data visualizations, the information can be communicated efficiently and effectively, albeit broadly.</p>
+      <h3>Target Audience</h3>
+      <p>New or casual horse racing enthusiasts are the intended audience – people who are not experts but want to familiarize themselves with the sport, and even potentially bet at their local racecourses. This website offers general, broad, all-time data, local and racecourse-specific data, and horse lineage record data, which may interest any fan.</p>
+      <h3>Dataset</h3>
+      <p><a href="https://www.kaggle.com/datasets/hwaitt/horse-racing/data" target="_blank" rel="noopener noreferrer">https://www.kaggle.com/datasets/hwaitt/horse-racing/data</a><br>This was the main dataset used, though it is not perfect, is missing entries, and has a skewed focus with Great Britain.</p>
+      <h3>Limitations and Challenges</h3>
+      <ul>
+        <li>At first, because the dataset was large (~90mb), I had to use Microsoft cloud file connection to import it in ObservableHQ, which made the loading speed very slow.</li>
+        <li>Midway through the project, I realized the dataset did not give units for currency or speed. I ended up cross-referencing a few races, to find that the prizes matched in Pound Sterling.</li>
+        <li>One parameter I didn't understand was what "TR – Top Speed" meant. The numbers didn't make sense for mph or km/h. Looking it up online suggested it meant "speed rating" – a measurement of speed accounting for several track conditions. That sounded correct at first, but online records showed that a speed rating of 140 was already the peak, while the numbers from the dataset far exceeded that. I was further confused and decided to remove that visualization.</li>
+        <li>After setting up the GitHub website, I noticed that it took a long time to load the website and was nearly impossible to load on mobile. I hypothesize that this was due to having too many Observable visualization embeds. I later tidied the code to not load various previous versions of the same Observable notebook.</li>
+        <li>Additionally, the Leaflet map markers that I wanted to sync with the dataset have this error where, even though I checked the data exists, selecting certain racecourse markers display a blank visualization.</li>
+      </ul>
+      <h3>Improvements (Future Work)</h3>
+      <p>If I were to make more changes, I think finding a more consistent and accurate dataset would be the first step. Then I could better organize my data and have more parameters to work with.<br>One feature I think is unfeasible currently would be to reenact past races and allow the user to place bets. At minimum, this would require extensive race results data and it would be impossible to acquire the positions throughout the race if I wanted to properly animate/recreate the race itself. Although, just simply displaying the results of the bet, without any animation at all, could suffice.<br>I would also want to have a specific horse data section, similar to the "specific racecourse" section, where such data like lineage, farm statistics, rivals, and career performance visualizations would be displayed. To take this a step further, with "rivals," two horses could be compared if they have raced before, to show a race history and how both have placed in comparison to one another.</p>
+      <h3>Sources</h3>
+      <ul class="sources-list">
+        <li><a href="https://www.irasutoya.com/?m=1" target="_blank" rel="noopener noreferrer">https://www.irasutoya.com/?m=1</a></li>
+        <li><a href="https://racingclub.com/wp-content/uploads/2024/12/what-are-the-jockey-silks-and-colours-scaled.webp" target="_blank" rel="noopener noreferrer">https://racingclub.com/wp-content/uploads/2024/12/what-are-the-jockey-silks-and-colours-scaled.webp</a></li>
+        <li><a href="https://img.freepik.com/free-vector/black-white-checkered-chessboard-pattern-background_1017-60365.jpg?semt=ais_incoming&w=740&q=80" target="_blank" rel="noopener noreferrer">https://img.freepik.com/free-vector/black-white-checkered-chessboard-pattern-background_1017-60365.jpg?semt=ais_incoming&w=740&q=80</a></li>
+        <li><a href="https://media4.s-nbcnews.com/i/MSNBC/Components/Photo/_new/090716-science-jockeys-hlarge-430p.jpg" target="_blank" rel="noopener noreferrer">https://media4.s-nbcnews.com/i/MSNBC/Components/Photo/_new/090716-science-jockeys-hlarge-430p.jpg</a></li>
+      </ul>
     </section>
   </div>
 
@@ -292,17 +323,20 @@
   <div class="nav-dot" data-section="section-general"><span class="tooltip">General</span></div>
   <div class="nav-dot" data-section="section-local"><span class="tooltip">Local</span></div>
   <div class="nav-dot" data-section="section-lineage"><span class="tooltip">Lineage</span></div>
+  <div class="nav-dot" data-section="report-section"><span class="tooltip">Report</span></div>
 </div>
 
 <script>
-  // Hero shrink + discover button
+  // Hero shrink
   const hero = document.getElementById('mainHero');
   function handleHeroShrink() { if (window.scrollY > 45) hero.classList.add('hero-shrink'); else hero.classList.remove('hero-shrink'); }
   window.addEventListener('scroll', handleHeroShrink);
   handleHeroShrink();
-  document.getElementById('discoverBtn').addEventListener('click', () => document.getElementById('section-welcome').scrollIntoView({ behavior: 'smooth', block: 'start' }));
+  document.getElementById('discoverBtn').addEventListener('click', () => {
+    document.getElementById('section-welcome').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
 
-  // Leaflet map (same as before)
+  // ---------- ORIGINAL LEAFLET MAP (NO DUPLICATES) ----------
   const map = L.map('map').setView([52.5, -1.5], 6);
   L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
     attribution: 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012',
@@ -332,17 +366,35 @@
     dropdown.innerHTML = '<option value="">-- Select a racecourse --</option>';
     sorted.forEach(c => { const opt = document.createElement('option'); opt.value = c.name; opt.textContent = c.name; dropdown.appendChild(opt); });
   }
+
   fetch('data/racecourses.json')
-    .then(r => r.json())
-    .then(courses => {
-      allCourses = courses; populateDropdown(allCourses);
-      courses.forEach(course => L.marker([course.lat, course.lng]).addTo(map).bindPopup(`${course.name} Racecourse`).on('click', () => updateSelectedCourseInObservable(course.name)));
+    .then(response => response.json())
+    .then(raceCourses => {
+      allCourses = raceCourses;
+      populateDropdown(allCourses);
+      raceCourses.forEach(course => {
+        L.marker([course.lat, course.lng]).addTo(map)
+          .bindPopup(`${course.name} Racecourse`)
+          .on('click', () => updateSelectedCourseInObservable(course.name));
+      });
     })
     .catch(() => {
-      const fallback = [{name:"Ascot",lat:51.4096,lng:-0.5856},{name:"Cheltenham",lat:51.9194,lng:-2.0581},{name:"Newmarket",lat:52.2446,lng:0.4074},{name:"York",lat:53.9626,lng:-1.0819},{name:"Curragh (IRE)",lat:53.15,lng:-6.75},{name:"Leopardstown (IRE)",lat:53.2667,lng:-6.1667}];
-      allCourses = fallback; populateDropdown(fallback);
-      fallback.forEach(course => L.marker([course.lat, course.lng]).addTo(map).bindPopup(course.name).on('click', () => updateSelectedCourseInObservable(course.name)));
+      const fallbackCourses = [
+        { name: "Ascot", lat: 51.4096, lng: -0.5856 }, { name: "Cheltenham", lat: 51.9194, lng: -2.0581 },
+        { name: "Newmarket", lat: 52.2446, lng: 0.4074 }, { name: "York", lat: 53.9626, lng: -1.0819 },
+        { name: "Curragh (IRE)", lat: 53.15, lng: -6.75 }, { name: "Leopardstown (IRE)", lat: 53.2667, lng: -6.1667 },
+        { name: "Fairyhouse (IRE)", lat: 53.4348, lng: -6.3817 }, { name: "Punchestown (IRE)", lat: 53.2279, lng: -6.6090 },
+        { name: "Galway (IRE)", lat: 53.2707, lng: -9.0587 }, { name: "Killarney (IRE)", lat: 52.0599, lng: -9.5042 }
+      ];
+      allCourses = fallbackCourses;
+      populateDropdown(allCourses);
+      fallbackCourses.forEach(course => {
+        L.marker([course.lat, course.lng]).addTo(map)
+          .bindPopup(course.name)
+          .on('click', () => updateSelectedCourseInObservable(course.name));
+      });
     });
+
   document.getElementById('courseDropdown').addEventListener('change', e => { if(e.target.value) updateSelectedCourseInObservable(e.target.value); });
 
   // Tabs
@@ -372,7 +424,7 @@
   document.addEventListener('mouseup', () => { dragging = false; horse.style.cursor = 'grab'; });
   updateHorsePos();
 
-  // Dot nav
+  // Dot nav (including report section)
   const dots = document.querySelectorAll('.nav-dot');
   const sections = Array.from(dots).map(d => document.getElementById(d.dataset.section));
   function updateActiveDot() { let idx = 0; const scrollPos = window.scrollY+140; sections.forEach((s,i) => { if(s && s.offsetTop <= scrollPos) idx=i; }); dots.forEach((d,i) => i===idx ? d.classList.add('active') : d.classList.remove('active')); }
@@ -381,13 +433,12 @@
   dots.forEach((dot,idx) => dot.addEventListener('click', () => sections[idx]?.scrollIntoView({behavior:'smooth'})));
 </script>
 
-<!-- SINGLE OBSERVABLE RUNTIME (version 631) to avoid overload -->
+<!-- SINGLE OBSERVABLE RUNTIME (version 631) -->
 <script type="module">
 import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@5/dist/runtime.js";
 import define from "https://api.observablehq.com/d/b4374c2e7ce71428@631.js?v=4";
 
 new Runtime().module(define, name => {
-  // Mapping from cell name to DOM container selector
   const mapping = {
     "racespereyear": "#observablehq-racespereyear-582",
     "topwinhorses": "#observablehq-topwinhorses-582",
@@ -423,22 +474,12 @@ new Runtime().module(define, name => {
     "e13c521e": "#observablehq-e13c521e"
   };
   if (mapping[name]) {
-    const container = document.querySelector(mapping[name]);
-    if (container) return new Inspector(container);
-    else console.warn(`Container for ${name} not found`);
+    const el = document.querySelector(mapping[name]);
+    if (el) return new Inspector(el);
   }
-  // Handle the selectedCourse input (for dropdown/map interaction)
   if (name === "viewof selectedCourse") {
-    return {
-      fulfilled: (value) => {
-        window.selectedCourseInput = value;
-        // Also attach listener to update dropdown when Observable changes externally (if needed)
-        return new Inspector(document.createElement('div')); // invisible
-      },
-      rejected: (error) => console.error(error)
-    };
+    return { fulfilled: (value) => { window.selectedCourseInput = value; return new Inspector(document.createElement('div')); } };
   }
-  // Ignore other cells
   return { fulfilled() {}, rejected() {} };
 });
 </script>
